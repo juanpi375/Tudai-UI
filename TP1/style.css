@@ -1,0 +1,16 @@
+main {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.canvas{
+    /* width: 600px;
+    height: 400px; */
+    /* only width and height set on html works */
+    margin-bottom: 30px;
+    background: #bbb;
+}
