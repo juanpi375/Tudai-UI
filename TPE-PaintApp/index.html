@@ -1,15 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>TPE - Paint App</title>
 </head>
+
 <body>
     <main>
-        <canvas id="canvas1" height="600" width="800"></canvas>
+        <ul>
+            <canvas id="canvas1" width="600" height="800"></canvas>
+            <li>
+                <button onclick="document.querySelector('#input1').click();">Selecciona una imágen</button>
+                <input id="input1" type="file" style="display: none;">  
+            </li>
+            <li>
+                <button id="button1">Filtro de escala de grises</button>
+            </li>
+            <li>
+                <button id="button2">Filtro de brillo</button>
+            </li>
+            <li>
+                <button id="button3">Filtro de umbral</button>
+            </li>
+            <li>
+                <button id="button4">Filtro de algo dificil</button>
+            </li>
+                <!-- Complex filters: -->
+            <li>
+                <button id="button5">Filtro de algo Sobel</button>
+            </li>
+            <li>
+                <button id="button6">Filtro de algo blur</button>
+            </li>
+            <li>
+                <button id="button6">Pluma</button>
+            </li>
+            <li>
+                <button id="button6">Borrador</button>
+            </li>
+        </ul>
     </main>
     <script src="script.js"></script>
 </body>
+
 </html>

@@ -232,6 +232,7 @@ function draw3GradientVert(width, height, rI, gI, bI, r2, g2, b2, r3, g3, b3, ct
             imgDataN.data[(y*width*4+x) + 1] = g
             imgDataN.data[(y*width*4+x) + 2] = b
             imgDataN.data[(y*width*4+x) + 3] = 255
+            // it might be (y*width+x)*4..
 
             let divisionConst = (width-5)/2.0
             if (x < ((width*4) / 2)){

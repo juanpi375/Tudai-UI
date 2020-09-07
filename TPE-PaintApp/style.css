@@ -1,3 +1,9 @@
-#canvas1{
+/* #canvas1{
     background: #aaa;
+} */
+main{
+    text-align: center;
+}
+li{
+    list-style: none;
 }
