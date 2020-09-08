@@ -11,36 +11,53 @@
 <body>
     <main>
         <ul>
-            <canvas id="canvas1" width="600" height="800"></canvas>
+        <canvas id="canvas1" width="600" height="600" style="border: 4px solid #777; border-radius: 10px; background: rgb(180,180,180)"></canvas>
             <li>
                 <button onclick="document.querySelector('#input1').click();">Selecciona una imágen</button>
                 <input id="input1" type="file" style="display: none;">  
             </li>
             <li>
-                <button id="button1">Filtro de escala de grises</button>
+                <button onclick="document.querySelector('#buttonDownload').click();">Descargar imágen</button>
+                <a href="" download="myImg.png" id="buttonDownload" style="display: none;"></a>
             </li>
             <li>
-                <button id="button2">Filtro de brillo</button>
+                <button id="deleteImageButton">Eliminar imágen</button>
             </li>
             <li>
-                <button id="button3">Filtro de umbral</button>
+                <button id="grayScaleButton">Filtro de escala de grises</button>
+            </li>
+            <li>
+                <button id="brightButton">Filtro de brillo</button>
+            </li>
+            <li>
+                <button id="thresholdButton">Filtro de umbral</button>
+            </li>
+            <li>
+                <button id="negativeButton">Filtro de negativo</button>
             </li>
             <li>
                 <button id="button4">Filtro de algo dificil</button>
             </li>
                 <!-- Complex filters: -->
             <li>
-                <button id="button5">Filtro de algo Sobel</button>
+                <button id="sobelButton">Filtro de Sobel</button>
             </li>
             <li>
-                <button id="button6">Filtro de algo blur</button>
+                <button id="blurButton">Filtro de blur</button>
             </li>
-            <li>
+
+            <!-- <li>
                 <button id="button6">Pluma</button>
-            </li>
-            <li>
+            </li> -->
+            <form action="" id="toolSelector">
+                <label for="pen">Pincel</label>
+                <input type="radio" name="Pen" id="pen" value="1" class="toolSelection" checked>
+                <label for="eraser">Borrador</label>
+                <input type="radio" name="Pen" id="eraser" value="2" class="toolSelection">
+            </form>
+            <!-- <li>
                 <button id="button6">Borrador</button>
-            </li>
+            </li> -->
         </ul>
     </main>
     <script src="script.js"></script>
