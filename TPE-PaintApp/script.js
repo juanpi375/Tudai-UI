@@ -1,89 +1,35 @@
-// let canv = document.querySelector("#canvas1")
-// let cx = canv.getContext("2d")
-// let paint = false
-// let clickX = []
-// let clickY = []
-// let clickDrag = []
-
-// canv.onmousedown = (function(e){
-//     let mouseX = e.pageX - this.offsetLeft
-//     let mouseY = e.pageY - this.offsetTop
-
-//     paint = true
-//     addClick(mouseX, mouseY)
-//     redraw()
-// })
-
-// canv.onmousemove = (function(e){
-//     if (paint){
-//         addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true)
-//         redraw()
-//     }
-// })
-
-// canv.onmouseup = (function(e){
-//     paint = false
-// })
-
-// canv.onmouseleave = (function(e){
-//     paint = false
-// })
-
-// function addClick(x, y, dragging){
-//     clickX.push(x);
-//     clickY.push(y);
-//     clickDrag.push(dragging);
-// }
-
-// function redraw(){
-//     cx.clearRect(0, 0, canv.width, canv.height)
-//     cx.strokeStyle = "#fff"
-//     cx.lineJoin = "round"
-//     cx.lineWidth = 5
-//     for(let i = 0; i < clickX; i++){
-//         cx.beginPath()
-//         if(clickDrag[i] && i){
-//             cx.moveTo(clickX[i-1], clickY[i-1])
-//         }else{
-//             cx.moveTo(clickX[i]-1, clickY[i])
-//         }
-//         cx.lineTo(clickX[i], clickY[i])
-//         cx.closePath()
-//         cx.stroke()
-//         // console.log("some")
-//     }
-// }
-
-// Code for setting an image:
-
-//get component references
 let canvas = document.querySelector('#canvas1');
-let input = document.querySelector('#input1');
+let selectImageButton = document.querySelector('#selectImageButton');
 
-// clear canvas
 let context = canvas.getContext('2d');
-
-// 
 let imageData = context.createImageData(canvas.width, canvas.height)
+
+let downloadButton = document.querySelector("#buttonDownload")
 let grayScaleButton = document.querySelector("#grayScaleButton")
 let brightButton = document.querySelector("#brightButton")
 let thresholdButton = document.querySelector("#thresholdButton")
 let negativeButton = document.querySelector("#negativeButton")
 let sobelButton = document.querySelector("#sobelButton")
 let blurButton = document.querySelector("#blurButton")
+let saturateButton = document.querySelector("#saturateButton")
+let sepiaButton = document.querySelector("#sepiaButton")
 
+
+downloadButton.addEventListener("click", download)
 grayScaleButton.addEventListener("click", function(){Filters.grayScale()})
 brightButton.addEventListener("click", function(){Filters.bright()})
 thresholdButton.addEventListener("click", function(){Filters.threshold()})
 negativeButton.addEventListener("click", function(){Filters.negative()})
-sobelButton.addEventListener("click", function(){Filters.sobel()})
+sepiaButton.addEventListener("click", function(){Filters.sepia()})
+blurButton.addEventListener("click", function(){Filters.blur(imageData, matReference, false)})
+saturateButton.addEventListener("click", function(){Filters.saturate()})
+
 // [  0, -1,  0,
 //   -1,  5, -1,
 //    0, -1,  0 ]
 // blurButton.addEventListener("click", function(){Filters.blur(imageData, [ 0, -1,  0, -1,  5, -1, 0, -1,  0 ], false)})
 // blurButton.addEventListener("click", function(){Filters.blur(imageData, [1/9, 1/9, 1/9, 1/9, 1/9, 1/9, 1/9, 1/9, 1/9], false)})
 // blurButton.addEventListener("click", function(){Filters.blur(imageData, [0.15, 0.15, 0.15, 0.15, -0.2, 0.15, 0.15, 0.15, 0.15], false)})
-// blurButton.addEventListener("click", function(){Filters.blur(imageData, [0.00, 0.00, 0.00, 0.00, 1, 0.00, 0.00, 0.00, 0.00], false)})
 // let matReference = [1/16, 1/16, 1/16, 1/16,
                     // 1/16, 1/16, 1/16, 1/16, 
                     // 1/16, 1/16, 1/16, 1/16, 
@@ -118,7 +64,6 @@ let matReference = [1/36, 1/36, 1/36,
                     1/36, 1/36, 1/36,
                     1/36, 1/36, 1/36 ]
 
-blurButton.addEventListener("click", function(){Filters.blur(imageData, matReference, false)})
 // let blurMatrix = matGenerator(9)
 // blurButton.addEventListener("click", function(){Filters.blur(imageData, blurMatrix, false)})
 
@@ -136,10 +81,8 @@ blurButton.addEventListener("click", function(){Filters.blur(imageData, matRefer
 // }
 // matGenerator(9)
 
-
 // --------------------------PHOTO LOADING---------------------------
-input.onchange = e => {
-    // CHECK
+selectImageButton.onchange = e => {
     deleteImage()
 
     // getting a hold of the file reference
@@ -181,21 +124,12 @@ input.onchange = e => {
 
             // draw the modified image
             context.putImageData(imageData, 0, 0);
-            // Filters.grayScale()
+            
+            // Let Filters be applied
+            // imageLoaded = true
         }
     }
 }
-            // Filter of black stripes:
-            // for (let j = 0; j < imageData.height; j++) {
-            //     for (let i = 0; i < imageData.width; i++) {
-            //         if (i % 2 == 0) {
-            //             let index = (i + imageData.width * j) * 4;
-            //             imageData.data[index + 0] = 0;
-            //             imageData.data[index + 1] = 0;
-            //             imageData.data[index + 2] = 0;
-            //         }
-            //     }
-            // }
             
 let toolSelector = document.querySelector("#toolSelector")
 // Set starting selected tool
@@ -203,9 +137,6 @@ let pen = document.querySelector("#pen")
 pen.checked = true 
 // Set the initial tool value, because the form has not changed yet
 let toolSelected = "1"
-let downloadButton = document.querySelector("#buttonDownload")
-
-downloadButton.addEventListener("click", download)
 
 toolSelector.addEventListener("change", function(){
     let inputs = document.querySelectorAll(".toolSelection")
@@ -245,7 +176,6 @@ canvas.onmouseleave = (function(e){
 })
 
 canvas.addEventListener("mousemove", function(e) {
-    // console.log(action)
     if (action) {
         let x = e.pageX - this.offsetLeft;
         let y = e.pageY - this.offsetTop;
@@ -288,12 +218,9 @@ canvas.addEventListener("mousemove", function(e) {
 canvas.addEventListener("mouseup", function() {
     action = false;
     lines = []
-    // console.log(lines);
 })
 
 function Draw(x, y) {
-    // console.log(imageData)
-    // console.log("ak")
     if (toolSelected == 1){
         setPixel(imageData, x-1, y, 0, 0, 0, 255)
         setPixel(imageData, x, y-1, 0, 0, 0, 255)
@@ -304,17 +231,26 @@ function Draw(x, y) {
         setPixel(imageData, x, y+1, 0, 0, 0, 255)
     }
     if (toolSelected == 2){
-        setPixel(imageData, x-1, y, 180, 180, 180, 255)
-        setPixel(imageData, x, y-1, 180, 180, 180, 255)
+        // setPixel(imageData, x-1, y, 180, 180, 180, 255)
+        // setPixel(imageData, x, y-1, 180, 180, 180, 255)
 
-        setPixel(imageData, x, y, 180, 180, 180, 255)
+        // setPixel(imageData, x, y, 180, 180, 180, 255)
 
-        setPixel(imageData, x+1, y, 180, 180, 180, 255)
-        setPixel(imageData, x, y-1, 180, 180, 180, 255)
+        // setPixel(imageData, x+1, y, 180, 180, 180, 255)
+        // setPixel(imageData, x, y+1, 180, 180, 180, 255)
+
+        let factor = 20
+        for(let i = y-factor; i < y+factor; i++){
+            for(let j = x-factor; j < x+factor; j++){
+                setPixel(imageData, j, i, 180, 180, 180, 255)
+            }
+        }
     }
 }
 
-// console.log(imageData)
+
+
+
 function setPixel(imageData, x, y, r, g, b, a) {
     if (x < imageData.width && x > -1 && y < imageData.height && y > -1){
         let index = (x + y * imageData.width) * 4
@@ -329,12 +265,19 @@ let deleteImageButton = document.querySelector("#deleteImageButton")
 deleteImageButton.addEventListener("click", deleteImage)
 
 function deleteImage(){
+    // imageLoaded = false
     imageData = context.createImageData(canvas.width, canvas.height)
     context.putImageData(imageData, 0, 0)
 }
 
 let Filters = {}
+// Represents if a filter can be applied
+// Setted on the photo loading
+// let imageLoaded = false
+
 Filters.grayScale = function(){
+    // If there´s no image yet, the filter won´t be applied
+    // if (!imageLoaded){return}
     let d = imageData.data;
     for (let i=0; i<d.length; i+=4) {
         let r = d[i];
@@ -354,6 +297,7 @@ Filters.grayScale = function(){
 }
 
 Filters.bright = function(){
+    // if (!imageLoaded){return}
     let d = imageData.data;
     let adjustment = 15
     for (let i=0; i<d.length; i+=4) {
@@ -365,6 +309,7 @@ Filters.bright = function(){
 }
 
 Filters.threshold = function(){
+    // if (!imageLoaded){return}
     let d = imageData.data;
     let reference = 70
     for (let i=0; i<d.length; i+=4) {
@@ -378,6 +323,7 @@ Filters.threshold = function(){
 }
 
 Filters.negative = function(){
+    // if (!imageLoaded){return}
     let d = imageData.data;
     for (let i=0; i<d.length; i+=4) {
         d[i] = 255 - d[i]
@@ -387,14 +333,33 @@ Filters.negative = function(){
     context.putImageData(imageData, 0, 0)
 }
 
+Filters.sepia = function(){
+    // for(let i = 0; i<canvas.width-1; i++){
+        // for(let j = 0; j<canvas.height; j++){
+            let d = imageData.data
+            for (let i=0; i<d.length; i+=4) {
+            // let promedio = Math.floor((getRed(i,j)+getGreen(i,j)+getBlue(i,j))/3)
+            let media = Math.floor((d[i]+d[i+1]+d[i+2])/3)
+            // let newRed = Math.min(promedio+40,255)
+            // let newGreen = Math.min(promedio+15,255)
+            // let newBlue = Math.min(promedio,255)
+            d[i] = Math.min(media+40,255)
+            d[i+1] = Math.min(media+15,255)
+            d[i+2] = Math.min(media,255)
+            // setPixel(imageData,i,j,newRed,newGreen,newBlue,255)
+        // }
+    }
+    context.putImageData(imageData,0,0)
+}
 
-// ---------------------experiment------------------
+
 
 Filters.tmpCanvas = document.createElement('canvas');
 Filters.tmpCtx = Filters.tmpCanvas.getContext('2d');
 
 Filters.createImageData = function(w,h) {
     return this.tmpCtx.createImageData(w,h);
+    // return context.createImageData(w,h);
 };
 
 // Filters.blur = function(){
@@ -402,6 +367,7 @@ Filters.createImageData = function(w,h) {
 // }
 
 Filters.blur = function(pixels, weights, opaque) {
+    // if (!imageLoaded){return}
     // Square of the elements in the matrix
   let side = Math.round(Math.sqrt(weights.length));
   let halfSide = Math.floor(side/2);
@@ -446,58 +412,112 @@ Filters.blur = function(pixels, weights, opaque) {
       dst[dstOff+3] = a + alphaFac*(255-a);
     }
   }
-  context.putImageData(output, 0, 0)
+//   The previous image data becomes the new one
+  imageData = output
+  context.putImageData(imageData, 0, 0)
 //   console.log(imageData)
 //   console.log(output)
   //   return output;
 }
 
-
-
-
-
-
-
-
-
-/* canvas.addEventListener("mousemove", function(e) {
-    if (action) {
-        let x = e.pageX - this.offsetLeft;
-        let y = e.pageY - this.offsetTop;
-
-      
-        
-if(lines.length > 0) {
-            let distanceY = y - lines[lines.length - 1][1];
-            let distanceX = x - lines[lines.length - 1][0];
-            let moduleY = Math.abs(distanceY);
-            let moduleX = Math.abs(distanceX);
-            let aux = 0;
-            if(moduleX > moduleY) {
-                aux = moduleX;
-            }
-else {
-                aux = moduleY;
-            }
-            let auxX = lines[lines.length - 1][0];
-            let auxY = lines[lines.length - 1][1];
-            for(let i = 0; i < aux; i ++) {
-                auxX += distanceX / aux;
-                auxY += distanceY / aux;
-                Draw(Math.round(auxX), Math.round(auxY));
-            }
+Filters.saturate = function(){
+    // if (!imageLoaded){return}
+    // let d = imageData.data;
+    // for (let i=0; i<d.length; i+=4) {
+    //     d[i] = 255 - d[i]
+    //     d[i+1] = 255 - d[i+1]
+    //     d[i+2] = 255 - d[i+2]
+    //     let r = d[i]/255, g = d[i+1]/255, b = d[i+2]/255
+        // let cmax = Math.max(r,g,b)
+    // }
+    for(let i = 0; i<canvas.width-1; i++){
+        for(let j = 0; j<canvas.height; j++){
+            // let red = getRed(i,j)
+            // let green = getGreen(i,j)
+            // let blue = getBlue(i,j)
+            let mod = (i + j * imageData.width) * 4
+            let r = imageData.data[mod]/255, g = imageData.data[mod+1]/255, b = imageData.data[mod+2]/255
+            // let r = red/255
+            // let g = green/255
+            // let b = blue/255
+            let cmax = Math.max(r,g,b)
+            let cmin = Math.min(r,g,b)
+            let delta = cmax-cmin
+            let hue = calcularHue(delta,cmax,r,g,b)
+            let light = calcularLight(cmax,cmin)
+            let sat = calcularSat(light,delta) + 0.2
+            let c = calcularC(sat,light)
+            let x = obtenerX(hue,c)
+            let m = light - (c/2)
+            let arrayNewRGB = calcularNewRGB(hue,c,x)
+            let r1 = arrayNewRGB[0]
+            let g1 = arrayNewRGB[1]
+            let b1 = arrayNewRGB[2]
+            let newRed = (r1+m)*255
+            let newGreen = (g1+m)*255
+            let newBlue = (b1+m)*255
+            setPixel(imageData,i,j,newRed,newGreen,newBlue,255)
         }
-        lines.push([x, y]);
-        Draw(x, y);
     }
-});
-function setPixel(imageData, y, x, r, g, b, a) {
-    imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    let index = (y + x * imageData.width) * 4;
-    imageData.data[index + 0] = r;
-    imageData.data[index + 1] = g;
-    imageData.data[index + 2] = b;
-    imageData.data[index + 3] = a;
-    ctx.putImageData(imageData, 0, 0);
-} */
+    context.putImageData(imageData,0,0)
+}
 
+function calcularNewRGB(hue,c,x){
+    if(hue>=0 && hue<60){
+        return [c,x,0]
+    }else if (hue>=60 && hue<120){
+        return [x,c,0]
+    }else if (hue>=120 && hue <180){
+        return [0,c,x]
+    }else if (hue>=180 && hue<240){
+        return [0,x,c]
+    }else if (hue>=240 && hue<300){
+        return [x,0,c]
+    }else{
+        return [c,0,x]
+    }
+}
+
+function obtenerX(hue, c){
+    let aux = ((hue / 60) % 2) - 1
+    if (aux<0){
+        aux = aux*-1
+    }
+    return c * (1 - aux)
+}
+
+function calcularC(sat,light){
+    let aux = 2*light - 1
+    if (aux<0){
+        aux = aux* -1
+    }
+    return (1 - aux) * sat
+}
+
+function calcularHue(delta,cmax,r,g,b){
+    if (delta==0){
+        return 0
+    }else if (cmax==r){
+        return Math.floor(60*(((g-b)/delta)%6))
+    }else if(cmax==g){
+        return Math.floor(60*(((b-r)/delta)+2))
+    }else{
+        return Math.floor(60*(((r-g)/delta)+4))
+    }
+}
+
+function calcularLight(cmax,cmin){
+    return (cmax + cmin) / 2
+}
+
+function calcularSat(light,delta){
+    if (delta==0){
+        return 0
+    }else{
+        let aux = (2*light)-1
+        if (aux<0){
+            aux = aux * -1
+        }
+        return delta/(1-((2*light)-1))
+    }
+}

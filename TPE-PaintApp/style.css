@@ -1,9 +1,69 @@
 /* #canvas1{
     background: #aaa;
 } */
+*{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    background: #bbc;
+}
+h2{
+    font-size: 2.2em;
+    border-bottom: 3px solid #b0f;
+}
+label{
+    font-weight: 600;
+}
+h2, label{
+    /* text-align: center; */
+    color: #fff;
+}
+label, button{
+    font-size: 1em;
+}
+nav{
+    height: 95px;
+    margin-bottom: 75px;
+    padding-left: 6vh;
+    background: #b0f;
+}
+nav h1{
+    margin: 0;
+    line-height: 150px;
+    color: white;
+    font-size: 7em;
+}
 main{
-    text-align: center;
+    /* text-align: center; */
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: top;
+}
+ul{
+    padding: 0;
 }
 li{
     list-style: none;
+}
+button{
+    height: 35px;
+    margin-top: 12px;
+    border: none;
+    border-radius: 3px;
+    background: #fff;
+    color: #666;
+    font-weight: bold;
+}
+button:active{
+    color: #222;
+}
+.redLetters{
+    color: #c00;
+}
+.redLetters:active{
+    color: #f00;
 }
