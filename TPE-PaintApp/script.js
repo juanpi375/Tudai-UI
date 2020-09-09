@@ -105,7 +105,7 @@ sobelButton.addEventListener("click", function(){Filters.sobel()})
 //                     1/27, 1/27, 1/27]
 
 // The greater the matrix, the deeper the blur
-let matReference = [ 1/36, 1/36, 1/36,
+let matReference = [1/36, 1/36, 1/36,
                     1/36, 1/36, 1/36,
                     1/36, 1/36, 1/36,
                     1/36, 1/36, 1/36,
@@ -136,8 +136,12 @@ blurButton.addEventListener("click", function(){Filters.blur(imageData, matRefer
 // }
 // matGenerator(9)
 
-// when click OK in the File Dialog
+
+// --------------------------PHOTO LOADING---------------------------
 input.onchange = e => {
+    // CHECK
+    deleteImage()
+
     // getting a hold of the file reference
     let file = e.target.files[0];
 
@@ -155,10 +159,20 @@ input.onchange = e => {
         image.src = content;
 
         image.onload = function () {
-            let imageAspectRatio = (1.0 * this.height) / this.width;
-            let imageScaledWidth = canvas.width;
-            let imageScaledHeight = canvas.width * imageAspectRatio;
+            let imageAspectRatio = 0
+            let imageScaledWidth = 0
+            let imageScaledHeight = 0
 
+            if (this.height > this.width){
+                imageAspectRatio = (1.0 * this.height) / this.width;
+                imageScaledWidth = canvas.width;
+                imageScaledHeight = canvas.width * imageAspectRatio;
+            }
+            else{
+                imageAspectRatio = (1.0 * this.width) / this.height;
+                imageScaledWidth = canvas.height * imageAspectRatio;
+                imageScaledHeight = canvas.height;
+            }
             // draw image on canvas
             context.drawImage(this, 0, 0, imageScaledWidth, imageScaledHeight);
 
@@ -315,17 +329,11 @@ let deleteImageButton = document.querySelector("#deleteImageButton")
 deleteImageButton.addEventListener("click", deleteImage)
 
 function deleteImage(){
-    let c = canvas
-    let d = imageData.data;
-    for (let i=0; i<c.width*c.height*4; i++) {
-        d[i] = 180
-        d[i+1] = 180
-        d[i+2] = 180
-    }
+    imageData = context.createImageData(canvas.width, canvas.height)
     context.putImageData(imageData, 0, 0)
 }
 
-Filters = {}
+let Filters = {}
 Filters.grayScale = function(){
     let d = imageData.data;
     for (let i=0; i<d.length; i+=4) {
@@ -379,6 +387,7 @@ Filters.negative = function(){
     context.putImageData(imageData, 0, 0)
 }
 
+
 // ---------------------experiment------------------
 
 Filters.tmpCanvas = document.createElement('canvas');
@@ -393,6 +402,7 @@ Filters.createImageData = function(w,h) {
 // }
 
 Filters.blur = function(pixels, weights, opaque) {
+    // Square of the elements in the matrix
   let side = Math.round(Math.sqrt(weights.length));
   let halfSide = Math.floor(side/2);
   let src = pixels.data;
@@ -401,9 +411,10 @@ Filters.blur = function(pixels, weights, opaque) {
   // pad output by the convolution matrix
   let w = sw;
   let h = sh;
+//   Creates aux canvas
   let output = Filters.createImageData(w, h);
   let dst = output.data;
-  // go through the destination image pixels
+  // Goes through the aux canvas
   let alphaFac = opaque ? 1 : 0;
   for (let y=0; y<h; y++) {
     for (let x=0; x<w; x++) {
@@ -412,6 +423,8 @@ Filters.blur = function(pixels, weights, opaque) {
       let dstOff = (y*w+x)*4;
       // calculate the weighed sum of the source image pixels that
       // fall under the convolution matrix
+
+    // Goes through the numbers
       let r=0, g=0, b=0, a=0;
       for (let cy=0; cy<side; cy++) {
         for (let cx=0; cx<side; cx++) {
