@@ -1,3 +1,5 @@
+"use strict"
+
 let canvas = document.querySelector('#canvas1');
 let selectImageButton = document.querySelector('#selectImageButton');
 
@@ -13,7 +15,11 @@ auxImageData.set = function(imgData){
         auxImageData.data[d] = imgData.data[d]
     }
 }
+
+// Makes the back up of the imageData
 auxImageData.set(imageData)
+// Sets some pixels of the color of the background
+deleteImage()
 
 
 let downloadButton = document.querySelector("#buttonDownload")
@@ -22,9 +28,10 @@ let brightButton = document.querySelector("#brightButton")
 let thresholdButton = document.querySelector("#thresholdButton")
 let negativeButton = document.querySelector("#negativeButton")
 let sobelButton = document.querySelector("#sobelButton")
-let blurButton = document.querySelector("#blurButton")
-let saturateButton = document.querySelector("#saturateButton")
 let sepiaButton = document.querySelector("#sepiaButton")
+let saturateButton = document.querySelector("#saturateButton")
+let blurButton = document.querySelector("#blurButton")
+let removeFiltersButton = document.querySelector("#removeFiltersButton")
 
 
 downloadButton.addEventListener("click", download)
@@ -33,8 +40,9 @@ brightButton.addEventListener("click", function(){Filters.bright()})
 thresholdButton.addEventListener("click", function(){Filters.threshold()})
 negativeButton.addEventListener("click", function(){Filters.negative()})
 sepiaButton.addEventListener("click", function(){Filters.sepia()})
-blurButton.addEventListener("click", function(){Filters.blur(imageData, matReference, false)})
 saturateButton.addEventListener("click", function(){Filters.saturate()})
+blurButton.addEventListener("click", function(){Filters.blur(imageData, matReference, false)})
+removeFiltersButton.addEventListener("click", function(){Filters.removeFilters()})
 
 // [  0, -1,  0,
 //   -1,  5, -1,
@@ -256,6 +264,16 @@ function setMultiPixel(factor, x, y, r, g, b, a){
     }
 }
 
+function fillBackground(imgData, r, g, b, a){
+    for (let index = 0; index < imgData.data.length; index += 4) {
+        imgData.data[index] = r
+        imgData.data[index+1] = g
+        imgData.data[index+2] = b
+        imgData.data[index+3] = a
+    }
+    // context.putImageData(imgData, 0, 0)
+}
+
 function setPixel(imageData, x, y, r, g, b, a) {
     if (x < imageData.width && x > -1 && y < imageData.height && y > -1){
         let index = (x + y * imageData.width) * 4
@@ -272,8 +290,7 @@ deleteImageButton.addEventListener("click", deleteImage)
 function deleteImage(){
     // imageLoaded = false
     imageData = context.createImageData(canvas.width, canvas.height)
-    // context.fillStyle = rgb(180, 180, 180)
-    // context.fillRect(0, 0, canvas.width, canvas.height)
+    fillBackground(imageData, 180, 180, 180, 255)
     auxImageData.set(imageData)
     context.putImageData(imageData, 0, 0)
 }
@@ -287,6 +304,11 @@ Filters.reset = function(){
     for (let d in imageData.data) {
         imageData.data[d] = auxImageData.data[d]
     }
+}
+
+Filters.removeFilters = function(){
+    Filters.reset()
+    context.putImageData(imageData, 0, 0)
 }
 
 Filters.grayScale = function(){
