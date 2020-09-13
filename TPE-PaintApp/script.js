@@ -4,6 +4,18 @@ let selectImageButton = document.querySelector('#selectImageButton');
 let context = canvas.getContext('2d');
 let imageData = context.createImageData(canvas.width, canvas.height)
 
+let auxImageData = {}
+auxImageData.set = function(imgData){
+    auxImageData.width = imgData.width
+    auxImageData.height = imgData.height
+    auxImageData.data = []
+    for (let d in imgData.data) {
+        auxImageData.data[d] = imgData.data[d]
+    }
+}
+auxImageData.set(imageData)
+
+
 let downloadButton = document.querySelector("#buttonDownload")
 let grayScaleButton = document.querySelector("#grayScaleButton")
 let brightButton = document.querySelector("#brightButton")
@@ -122,6 +134,9 @@ selectImageButton.onchange = e => {
             // get imageData from content of canvas
             imageData = context.getImageData(0, 0, imageScaledWidth, imageScaledHeight);
 
+            // Resets the image back up
+            auxImageData.set(imageData)
+
             // draw the modified image
             context.putImageData(imageData, 0, 0);
             
@@ -222,34 +237,24 @@ canvas.addEventListener("mouseup", function() {
 
 function Draw(x, y) {
     if (toolSelected == 1){
-        setPixel(imageData, x-1, y, 0, 0, 0, 255)
-        setPixel(imageData, x, y-1, 0, 0, 0, 255)
-
-        setPixel(imageData, x, y, 0, 0, 0, 255)
-
-        setPixel(imageData, x+1, y, 0, 0, 0, 255)
-        setPixel(imageData, x, y+1, 0, 0, 0, 255)
+        let factor = 1
+        setMultiPixel(factor, x, y, 0, 0, 0, 255)
     }
     if (toolSelected == 2){
-        // setPixel(imageData, x-1, y, 180, 180, 180, 255)
-        // setPixel(imageData, x, y-1, 180, 180, 180, 255)
-
-        // setPixel(imageData, x, y, 180, 180, 180, 255)
-
-        // setPixel(imageData, x+1, y, 180, 180, 180, 255)
-        // setPixel(imageData, x, y+1, 180, 180, 180, 255)
-
         let factor = 20
-        for(let i = y-factor; i < y+factor; i++){
-            for(let j = x-factor; j < x+factor; j++){
-                setPixel(imageData, j, i, 180, 180, 180, 255)
-            }
-        }
+        setMultiPixel(factor, x, y, 180, 180, 180, 255)
     }
 }
 
-
-
+// Commands the setPixel and how many times it does it
+function setMultiPixel(factor, x, y, r, g, b, a){
+    for(let i = y-factor; i <= y+factor; i++){
+        for(let j = x-factor; j <= x+factor; j++){
+            setPixel(imageData, j, i, r, g, b, a)
+            setPixel(auxImageData, j, i, r, g, b, a)
+        }
+    }
+}
 
 function setPixel(imageData, x, y, r, g, b, a) {
     if (x < imageData.width && x > -1 && y < imageData.height && y > -1){
@@ -267,6 +272,9 @@ deleteImageButton.addEventListener("click", deleteImage)
 function deleteImage(){
     // imageLoaded = false
     imageData = context.createImageData(canvas.width, canvas.height)
+    // context.fillStyle = rgb(180, 180, 180)
+    // context.fillRect(0, 0, canvas.width, canvas.height)
+    auxImageData.set(imageData)
     context.putImageData(imageData, 0, 0)
 }
 
@@ -275,9 +283,18 @@ let Filters = {}
 // Setted on the photo loading
 // let imageLoaded = false
 
+Filters.reset = function(){
+    for (let d in imageData.data) {
+        imageData.data[d] = auxImageData.data[d]
+    }
+}
+
 Filters.grayScale = function(){
     // If there´s no image yet, the filter won´t be applied
     // if (!imageLoaded){return}
+    // let l = auxImageData
+    // imageData.data = l
+    Filters.reset()
     let d = imageData.data;
     for (let i=0; i<d.length; i+=4) {
         let r = d[i];
@@ -298,6 +315,7 @@ Filters.grayScale = function(){
 
 Filters.bright = function(){
     // if (!imageLoaded){return}
+    Filters.reset()
     let d = imageData.data;
     let adjustment = 15
     for (let i=0; i<d.length; i+=4) {
@@ -310,6 +328,7 @@ Filters.bright = function(){
 
 Filters.threshold = function(){
     // if (!imageLoaded){return}
+    Filters.reset()
     let d = imageData.data;
     let reference = 70
     for (let i=0; i<d.length; i+=4) {
@@ -324,6 +343,7 @@ Filters.threshold = function(){
 
 Filters.negative = function(){
     // if (!imageLoaded){return}
+    Filters.reset()
     let d = imageData.data;
     for (let i=0; i<d.length; i+=4) {
         d[i] = 255 - d[i]
@@ -336,6 +356,7 @@ Filters.negative = function(){
 Filters.sepia = function(){
     // for(let i = 0; i<canvas.width-1; i++){
         // for(let j = 0; j<canvas.height; j++){
+            Filters.reset()
             let d = imageData.data
             for (let i=0; i<d.length; i+=4) {
             // let promedio = Math.floor((getRed(i,j)+getGreen(i,j)+getBlue(i,j))/3)
@@ -369,6 +390,7 @@ Filters.createImageData = function(w,h) {
 Filters.blur = function(pixels, weights, opaque) {
     // if (!imageLoaded){return}
     // Square of the elements in the matrix
+    Filters.reset()
   let side = Math.round(Math.sqrt(weights.length));
   let halfSide = Math.floor(side/2);
   let src = pixels.data;
@@ -430,6 +452,7 @@ Filters.saturate = function(){
     //     let r = d[i]/255, g = d[i+1]/255, b = d[i+2]/255
         // let cmax = Math.max(r,g,b)
     // }
+    Filters.reset()
     for(let i = 0; i<canvas.width-1; i++){
         for(let j = 0; j<canvas.height; j++){
             // let red = getRed(i,j)
