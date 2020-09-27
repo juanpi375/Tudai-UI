@@ -1,11 +1,14 @@
 // "use strict"
 class Piece{
-    constructor(context, size, posX, posY, color){
+    constructor(context, player, size, posX, posY, color){
         this.context = context
+        this.player = player
         this.posX = posX
         this.posY = posY
         this.size = size
         this.color = color
+        // Auxiliar for chekcing result
+        this.isCounted = false
         // this.player = 0
 
         this.clickDifferenceX = 0
@@ -97,6 +100,91 @@ class Piece{
         this.posX = (x - this.size / 2) + this.clickDifferenceX
         this.posY = (y - this.size / 2) + this.clickDifferenceY
         // console.log("this is the position "+this.posX)
+    }
+
+
+    checkDiagonalTop(numY, numX, board){
+        let sum = 1
+        this.isCounted = true
+        if(numY+1 < board.partsH && numX-1 >= 0){
+            let previousPiece = board.parts[numY+1][numX-1]
+            if(previousPiece != null
+                && !previousPiece.isCounted
+                && previousPiece.player == this.player){
+                    sum += previousPiece.checkDiagonalTop(numY+1, numX-1, board)
+            }
+        }
+        if(numY-1 >= 0 && numX+1 < board.partsW){
+            let nextPiece = board.parts[numY-1][numX+1]
+            if(nextPiece != null
+                && !nextPiece.isCounted
+                && nextPiece.player == this.player){
+                    sum += nextPiece.checkDiagonalTop(numY-1, numX+1, board)
+            }
+        }
+        this.isCounted = false
+        return sum
+    }
+
+    checkDiagonalBottom(numY, numX, board){
+        let sum = 1
+        this.isCounted = true
+        if(numY-1 >= 0 && numX-1 >= 0){
+            let previousPiece = board.parts[numY-1][numX-1]
+            if(previousPiece != null
+                && !previousPiece.isCounted
+                && previousPiece.player == this.player){
+                    sum += previousPiece.checkDiagonalBottom(numY-1, numX-1, board)
+            }
+        }
+        if(numY+1 < board.partsH && numX+1 < board.partsW){
+            let nextPiece = board.parts[numY+1][numX+1]
+            if(nextPiece != null
+                && !nextPiece.isCounted
+                && nextPiece.player == this.player){
+                    sum += nextPiece.checkDiagonalBottom(numY+1, numX+1, board)
+            }
+        }
+        this.isCounted = false
+        return sum
+    }
+
+    checkHorizontal(numY, numX, board){
+        let sum = 1
+        this.isCounted = true
+        if(numX-1 >= 0){
+            let previousPiece = board.parts[numY][numX-1]
+            if(previousPiece != null
+                && !previousPiece.isCounted
+                && previousPiece.player == this.player){
+                    sum += previousPiece.checkHorizontal(numY, numX-1, board)
+            }
+        }
+        if(numX+1 < board.partsW){
+            let nextPiece = board.parts[numY][numX+1]
+            if(nextPiece != null
+                && !nextPiece.isCounted
+                && nextPiece.player == this.player){
+                    sum += nextPiece.checkHorizontal(numY, numX+1, board)
+            }
+        }
+        this.isCounted = false
+        return sum
+    }
+
+    checkVertical(numY, numX, board){
+        let sum = 1
+        this.isCounted = true
+        if(numY-1 >= 0){
+            let previousPiece = board.parts[numY-1][numX]
+            if(previousPiece != null
+                && !previousPiece.isCounted
+                && previousPiece.player == this.player){
+                    sum += previousPiece.checkVertical(numY-1, numX, board)
+            }
+        }
+        this.isCounted = false
+        return sum
     }
 
 }
