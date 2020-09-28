@@ -43,8 +43,11 @@ button:active{
     color: #334;
 }
 #winnerMessage{
-    max-width: 10vw;
-    transition: all .2s;
+    max-width: 20vw;
+    padding: 12px;
+    background: #eee;
+    border-radius: 10px;
+    transition: all .3s;
 }
 #winnerMessage h2, #winnerMessage span{
     color: #224;

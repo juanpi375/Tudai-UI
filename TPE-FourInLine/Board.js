@@ -2,52 +2,46 @@ const PARTWIDTH = 60
 
 class Board{
     constructor(canvas, context, partsW, partsH){
-        console.log("b created")
         this.canvas = canvas
         this.context = context
-        // Height
+
+        // Partes de altp
         this.partsH = partsH
-        // Width
+        // Partes de ancho
         this.partsW = partsW
 
-        // this.initialWidth = 210
-        // Can I get it from canvas?
+        // Ancho desde el que el tablero será dibujado.
+        // Se acomoda a la mitad del ancho del canvas
         this.initialWidth = canvas.width/2 - PARTWIDTH*partsW/2
         this.initialHeight = 40
+
         // this.backgroundColor = "#753"
         // this.backgroundColor = "#740"
         this.backgroundColor ="#c51"
         // #cc5511
         this.clickablePartColor = "#f51"
 
-        // Matrix to control pieces
+        // Matriz para el control de las piezas
         this.parts = [this.partsH]
-        // From the bottom upwards
+        // Se dibuja desde abajo hacia arriba
         for (let i = 0; i < this.partsH; i++) {
             this.parts[i] = [this.partsW]
             for (let j = 0; j < this.partsW; j++) {
-                // this.context.fillRect(initialWidth, canvas.height-PARTWIDTH, PARTWIDTH, PARTWIDTH)
                 this.parts[i][j] = null
             }
         }
     }
 
+    // DIBUJA LOS BLOQUES DEL TABLERO DE A UNO
     draw() {
-        // Pieces for
-        // for (let index = 0; index < array.length; index++) {
-        //     const element = array[index];  
-        // }
         for (let i = 0; i < this.partsH; i++) {
             for (let j = 0; j < this.partsW; j++) {
-                // Draw the piece if it has
-                // console.log(this.parts[i][j])
+                // Dibuja piezas si las tiene
                 if (this.parts[i][j] != null){
                     this.parts[i][j].redraw()
-                    // console.log("humm, that is drawn for me")
                 }
 
-                // Draw the table borders
-                // this.context.fillStyle = "#863"
+                // Dibuja los cuadrados con hoyos
                 this.context.fillStyle = this.backgroundColor
                 let posX = this.initialWidth+(PARTWIDTH)*j
                 let posY = (canvas.height-this.initialHeight)-(PARTWIDTH)*(i+1)
@@ -58,31 +52,27 @@ class Board{
                 this.context.lineTo(posX + PARTWIDTH, posY + PARTWIDTH)
                 this.context.lineTo(posX + PARTWIDTH, posY)
                 this.context.closePath()
-                // this.context.fillRect(posX, posY, PARTWIDTH, PARTWIDTH)
 
-                // Draw the empty spaces
-                // this.context.fillStyle = "#863"
+                // Dibuja los espacios vacíos
                 this.context.arc(posX+PARTWIDTH/2, posY+PARTWIDTH/2, PARTWIDTH*0.35, 0, 2 * Math.PI)
                 this.context.closePath()
                 this.context.fill('evenodd')
             }
         }
 
-        // Represents the zone where the piece can be dropped
+        // Representa la zona donde las piezas pueden ser soltadas
         for (let j = 0; j < this.partsW; j++) {
             let posX = this.initialWidth+(PARTWIDTH)*j + PARTWIDTH/2
             let posY = (canvas.height-this.initialHeight)-(PARTWIDTH)*(this.partsH+1) + PARTWIDTH/2
-            // Positions from where the pieces take action 
 
-            // this.context.globalCompositeOperation = 'destination-out'
             this.context.fillStyle = this.clickablePartColor
             this.context.beginPath()
             this.context.arc(posX, posY, PARTWIDTH*0.2, 0, 2 * Math.PI)
             this.context.closePath()
             this.context.fill()
-            // this.context.globalCompositeOperation = 'source-over';
         }
     }
+
 
     canIntroduce(piece){
         let closestDif = null
@@ -93,7 +83,6 @@ class Board{
             let posX = this.initialWidth+(PARTWIDTH)*j + PARTWIDTH/2
             let posY = (canvas.height-this.initialHeight)-(PARTWIDTH)*(this.partsH+1) + PARTWIDTH/2
 
-            // mmmmm suspicious..
             // center of piece - center of table point
             let difX = (piece.posX + piece.size*0.5) - posX
             let difY = (piece.posY + piece.size*0.5) - posY
@@ -105,12 +94,10 @@ class Board{
                 if (closestIndex != null && totalDifference < closestDif){
                     closestIndex = j
                     closestDif = totalDifference
-                    // console.log("weeeepa "+ j)
                 }
                 else if(closestIndex == null){
                     closestIndex = j
                     closestDif = totalDifference
-                    // console.log("weeeepa de una"+ j)
                 }
             }
         }

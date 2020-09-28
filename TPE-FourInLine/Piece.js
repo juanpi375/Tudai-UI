@@ -1,4 +1,4 @@
-// "use strict"
+"use strict"
 class Piece{
     constructor(context, player, size, posX, posY, color){
         this.context = context
@@ -7,69 +7,31 @@ class Piece{
         this.posY = posY
         this.size = size
         this.color = color
-        // Auxiliar for chekcing result
+        // Auxiliar para calcular valor con recurrencia
         this.isCounted = false
-        // this.player = 0
 
+        // Auxiliares para calcular distancia de draggueo
         this.clickDifferenceX = 0
         this.clickDifferenceY = 0
 
+        // Carga de imágen de fondo
         this.img = new Image()
         this.img.src = "images/piece1.png"
 
+        // Llamado a carga por primera y única vez
         this.draw()
     }
 
-    // draw(img1){
-    //     let c = this.context
-    //     let pX = this.posX
-    //     let pY = this.posY
-    //     let s = this.size
-    //     let colr = this.color
-
-    //     // img1.onload = function(){
-    //     c.fillStyle = colr
-    //     c.beginPath()
-    //     c.arc(pX+s/2, pY+s/2, s/2.8, 0, 2 * Math.PI)
-    //     c.closePath()
-    //     c.fill()
-    //     c.drawImage(img1, pX, pY, s, s)
-    //     // }
-    // }
-
+    // Cuando cargue la imágen, llama al redraw común
     draw(){
         let my = this
         this.img.onload = function(){
-            // my.img.classList.add("inverted-image")
             my.redraw()
         }
-
-        // let img = new Image()
-        // img.src = "images/piece1.png"
-
-        // let c = this.context
-        // let pX = this.posX
-        // let pY = this.posY
-        // let s = this.size
-        // let colr = this.color
-
-        // img.addEventListener("load", function(){
-        // c.fillStyle = colr
-        // c.beginPath()
-        // c.arc(pX+s/2, pY+s/2, s/2.8, 0, 2 * Math.PI)
-        // c.closePath()
-        // c.fill()
-        // c.drawImage(img, pX, pY, s, s)
-        // })
     }
 
-    // redraw(){
-    //     console.log(this.img1)
-    //     this.img1.onload = function(){this.redraw1()}
-    // }
-
+    // Dibuja la imagen y le pinta el fondo
     redraw(){
-        // console.log(this.img1)
         let c = this.context
         let pX = this.posX
         let pY = this.posY
@@ -79,22 +41,20 @@ class Piece{
         c.fillStyle = colr
         c.beginPath()
         c.arc(pX+s/2, pY+s/2, s/2.8, 0, 2 * Math.PI)
-        // c.arc(pX+s/2, pY+s/2, s/2, 0, 2 * Math.PI)
         c.closePath()
         c.fill()
         c.drawImage(this.img, pX, pY, s, s)
     }
 
+    // DEFINE SI ESTÁ SIENDO CLIQUEADA
+    // Retorna la diferencia entre su punto medio
+    // y el click
     isPointInside(x, y){
-        // let difX = this.posX - (x + this.size/2)
-        // let difY = this.posY - (y + this.size/2)
         let difX = (this.posX + this.size/2) - x
         let difY = (this.posY + this.size/2) - y
-        // Need to set the difference in a var
+
         this.clickDifferenceX = difX
         this.clickDifferenceY = difY
-        // console.log(this.size/2)
-        // console.log("distance of x "+difX +"distance of y "+difY+" : "+Math.sqrt(Math.abs(difX * difX + difY * difY)))
        return  Math.sqrt(difX * difX + difY * difY) < (this.size/2.7)
     }
 
@@ -102,13 +62,20 @@ class Piece{
     setPos(x, y){
         this.posX = (x - this.size / 2) + this.clickDifferenceX
         this.posY = (y - this.size / 2) + this.clickDifferenceY
-        // console.log("this is the position "+this.posX)
     }
 
-
-    checkDiagonalTop(numY, numX, board){
+// CHEQUEOS RECURSIVOS EN BUSCA DE PIEZAS DEL MISMO COLOR
+// -----------------------------------------------------------------------
+// Chequea que en el tablero, exista una posición
+// superior izquierda. Si la hay, verifica que haya
+// una ficha y, si la hay, no ha sido contada aun y
+// es del mismo color, le aplico la misma operación sobre ella.
+// Luego realiza la misma operación en el sentido contrario.
+// Importante: hay que sumar 1 en alguna parte del proceso
+checkDiagonalTop(numY, numX, board){
         let sum = 1
         this.isCounted = true
+        // Verifica que los índices no se salgan del tablero
         if(numY+1 < board.partsH && numX-1 >= 0){
             let previousPiece = board.parts[numY+1][numX-1]
             if(previousPiece != null
@@ -117,6 +84,7 @@ class Piece{
                     sum += previousPiece.checkDiagonalTop(numY+1, numX-1, board)
             }
         }
+
         if(numY-1 >= 0 && numX+1 < board.partsW){
             let nextPiece = board.parts[numY-1][numX+1]
             if(nextPiece != null
@@ -129,6 +97,8 @@ class Piece{
         return sum
     }
 
+    // Lo mismo que checkDiagonalTop pero de
+    // la diagonal inferior izquierda a la superior derecha
     checkDiagonalBottom(numY, numX, board){
         let sum = 1
         this.isCounted = true
@@ -151,7 +121,9 @@ class Piece{
         this.isCounted = false
         return sum
     }
-
+    
+    // Lo mismo que checkDiagonalTop pero de
+    // la horizontal izquierda a la horizonatal derecha
     checkHorizontal(numY, numX, board){
         let sum = 1
         this.isCounted = true
@@ -174,7 +146,10 @@ class Piece{
         this.isCounted = false
         return sum
     }
-
+  
+    // Lo mismo que checkDiagonalTop pero en
+    // la vertical inferior. No se necesita chequear
+    // arriba porque es por donde la ficha cayó
     checkVertical(numY, numX, board){
         let sum = 1
         this.isCounted = true
@@ -189,5 +164,6 @@ class Piece{
         this.isCounted = false
         return sum
     }
+    // --------------------------------------------------------------
 
 }

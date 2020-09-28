@@ -1,213 +1,231 @@
 "use strict" 
 class Game{
     constructor(player1Name, player2Name, boardSize){
-        let canvas = document.querySelector("#canvas")
+        
+        this.canvas = document.querySelector("#canvas")
 
 
-
-
-        // CLONO EL CANVAS CADA VEZ QUE CREO UN JUEGO
+        
+        // CLONA EL canvas CADA VEZ QUE CREA UN JUEGO
         // Esto resetea los eventListeners al crear
         // nuevas instancias de game
-        let elClone = canvas.cloneNode(true);
-        canvas.parentNode.replaceChild(elClone, canvas);
-        canvas = elClone
+        let clone = this.canvas.cloneNode(true);
+        this.canvas.parentNode.replaceChild(clone, this.canvas);
+        this.canvas = clone
 
 
 
+        this.ctx = this.canvas.getContext("2d")
+        this.clickedElem = null
+        this.players = []
+        this.playerTourn = 0
+        let my = this
+        this.canvas.addEventListener("mousedown", function(e){my.mousedown(e)})
+        this.canvas.addEventListener("mouseup", function(){my.mouseup()})
+        this.canvas.addEventListener("mousemove", function(e){my.mousemove(e)})
+        this.canvas.addEventListener("mouseleave", function(){my.mouseleave()})
 
+        // Variables de tamaño del tablero
+        this.partsW = null
+        this.partsH = null
 
-
-        // canvas.removeEventListener("mousedown", mousedown)
-
-        let ctx = canvas.getContext("2d")
-        let clickedElem = null
-        let players = []
-        let playerTourn = 0
-        canvas.addEventListener("mousedown", mousedown)
-        // canvas.addEventListener("mousedown", function(e){
-        //     let clicked = findClicked(e.pageX - canvas.offsetLeft, e.pageY - this.offsetTop)
-        //     if(clicked == null){return}
-        //     // If the piece belongs to == the player whose turn is
-        //     if(clicked.player == players[playerTourn]){
-        //         clickedElem = clicked
-        //     }
-        // })
-
-        function mousedown(e){
-                let clicked = findClicked(e.pageX - canvas.offsetLeft, e.pageY - canvas.offsetTop)
-                if(clicked == null){return}
-                // If the piece belongs to == the player whose turn is
-                if(clicked.player == players[playerTourn]){
-                    clickedElem = clicked
-                }
-        }
-
-        canvas.addEventListener("mouseup", function(){
-            if(clickedElem != null){
-                let indexInBoard = b.canIntroduce(clickedElem)
-                // If I could put it in the board..
-                if (indexInBoard != null){
-                    putPieceInBoard(indexInBoard)
-                }
-            }
-            clickedElem = null
-        })
-
-        canvas.addEventListener("mousemove", function(e){
-            if (clickedElem == null){return}
-            clickedElem.setPos(e.pageX - canvas.offsetLeft, e.pageY - canvas.offsetTop)
-            redraw()    
-        })
-
-        canvas.addEventListener("mouseleave", function(){
-            clickedElem = null
-        })
-
-        let partsW = null
-        let partsH = null
         switch (boardSize) {
             case "5 - 4":
-                partsW = 5
-                partsH = 4
+                this.partsW = 5
+                this.partsH = 4
                 break
             case "6 - 5":
-                partsW = 6
-                partsH = 5
+                this.partsW = 6
+                this.partsH = 5
                 break;
             // Default is 7 - 6
             default:
-                partsW = 7
-                partsH = 6
+                this.partsW = 7
+                this.partsH = 6
                 break
         }
-        console.log(partsW+"w...h"+partsH)
-        let b = new Board(canvas, ctx, partsW, partsH)
 
-        players[0] = player1Name
-        players[1] = player2Name
-        let p = []
-        let s = []
+        // Creación del tablero
+        this.b = new Board(this.canvas, this.ctx, this.partsW, this.partsH)
 
-        let backgroundImage = new Image()
-        backgroundImage.src = "images/backgroundTable2.jpg"
+        // Inicialización de nombres y arrays de fichas de los jugadores
+        this.players[0] = player1Name
+        this.players[1] = player2Name
+        this.p = []
+        this.s = []
 
-        b.draw()
+        // Creación de imágen de fondo
+        this.backgroundImage = new Image()
+        this.backgroundImage.src = "images/backgroundTable2.jpg"
+        // b.draw()
 
-        backgroundFirstDraw()
+        this.backgroundFirstDraw()
+    }
 
-        function backgroundFirstDraw(){
-            backgroundImage.onload = function(){
-                ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height)
-                b.draw()
-                piecesFirstDraw()
+
+
+    // Primer dibujo del background, se debe esperar la imagen y luego
+        // llama a la función común de dibujar, junto con el primer
+        // dibujo de las fichas
+        backgroundFirstDraw(){
+            let my = this
+            this.backgroundImage.onload = function(){
+                my.ctx.drawImage(my.backgroundImage, 0, 0, my.canvas.width, my.canvas.height)
+                my.b.draw()
+                my.piecesFirstDraw()
             }
         }
 
-        function piecesFirstDraw(){
+        // --------------------------------------------------------
+        mousedown(e){
+            let clicked = this.findClicked(e.pageX - this.canvas.offsetLeft, e.pageY - this.canvas.offsetTop)
+            if(clicked == null){return}
+            // If the piece belongs to == the player whose turn is
+            if(clicked.player == this.players[this.playerTourn]){
+                this.clickedElem = clicked
+            }
+        }
+
+        mouseup() {
+            if(this.clickedElem != null){
+                let indexInBoard = this.b.canIntroduce(this.clickedElem)
+                // If I could put it in the board..
+                if (indexInBoard != null){
+                    this.putPieceInBoard(indexInBoard)
+                }
+            }
+            this.clickedElem = null
+        }
+
+        mousemove(e){
+            if (this.clickedElem == null){return}
+            this.clickedElem.setPos(e.pageX - this.canvas.offsetLeft, e.pageY - this.canvas.offsetTop)
+            this.redraw()    
+        }
+
+        mouseleave(){
+            this.clickedElem = null
+        }
+        // --------------------------------------------------------
+        
+        // Inicializa y dibuja las fichas en un lugar preseteado
+        piecesFirstDraw(){
             let yIncrement = 50
             let xIncrement = 0
-            for (let i = 0; i < partsH*partsW/2; i++) {
+            for (let i = 0; i < this.partsH*this.partsW/2; i++) {
                 if (i != 0 && i%7 == 0){
                     yIncrement += 50
                     xIncrement = 0
                 }
-                p[i] = new Piece(ctx, players[0], 70, 50+25*xIncrement, yIncrement, "#f00")
-                s[i] = new Piece(ctx, players[1], 70, canvas.width-250+25*xIncrement, yIncrement, "#00f")
+                this.p[i] = new Piece(this.ctx, this.players[0], 70, 50+25*xIncrement, yIncrement, "#f00")
+                this.s[i] = new Piece(this.ctx, this.players[1], 70, this.canvas.width-250+25*xIncrement, yIncrement, "#00f")
                 
                 xIncrement++
             }
         }
+        
+        // Redibuja en orden.. (Background, tablero, fichas)
+        redraw(){
+            this.ctx.drawImage(this.backgroundImage, 0, 0, this.canvas.width, this.canvas.height)
 
-        function redraw(){
-            // Here draws the image
-            ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height)
-
-            b.draw()
+            this.b.draw()
             
-            for (let i in p) {
-                p[i].redraw()
+            for (let i in this.p) {
+                this.p[i].redraw()
             }
-            for (let i in s){
-                s[i].redraw()
+            for (let i in this.s){
+                this.s[i].redraw()
             } 
         }
 
-        function findClicked(x, y){
-            let pLimit = p.length - 1
+        // Encuentra si alguna ficha fue cliqueada
+        findClicked(x, y){
+            let pLimit = this.p.length - 1
             while(pLimit >= 0){
-                if (p[pLimit].isPointInside(x, y)){
-                    return p[pLimit]
+                if (this.p[pLimit].isPointInside(x, y)){
+                    return this.p[pLimit]
                 }
                 pLimit--
             }
-            let sLimit = s.length - 1
+            let sLimit = this.s.length - 1
             while(sLimit >= 0){
-                if (s[sLimit].isPointInside(x, y)){
-                    return s[sLimit]
+                if (this.s[sLimit].isPointInside(x, y)){
+                    return this.s[sLimit]
                 }
                 sLimit--
             }
             return null
         }
-
-        function putPieceInBoard(indexInBoard){
-            let indexOfPiece = p.indexOf(clickedElem)
-            // let playerInTourn = clickedElem.player
-            // This must be fixed...
-            let introductionInBoard = b.introduce(clickedElem, indexInBoard)
-            // If the piece is of the player 2.. (could be a while)
+        
+        // Intenta meter la ficha en el tablero
+        // Primero consulta de quién es la ficha, después 
+        // dónde se encuentra la ficha en
+        // el arreglo del jugador, luego si se puede meter
+        // en el tablero y finalmente si es una jugada ganadora
+        putPieceInBoard(indexInBoard){
+            let indexOfPiece = this.p.indexOf(this.clickedElem)
+            let introductionInBoard = this.b.introduce(this.clickedElem, indexInBoard)
+            // If the piece is of the player 2.. (could be a While)
             if (indexOfPiece == -1){
-                indexOfPiece = s.indexOf(clickedElem)
+                indexOfPiece = this.s.indexOf(this.clickedElem)
             // If the piece of player 2 enters..
                 if(introductionInBoard != []){
-                    removePieceFromPlayer(s, indexOfPiece)
-                    redraw()
-                    // clickedElem()
-                    // checkWin(introductionInBoard[0], introductionInBoard[1], playerInTourn, clickedElem)
-                    checkWin(introductionInBoard[0], introductionInBoard[1], clickedElem)
-
+                    this.removePieceFromPlayer(this.s, indexOfPiece)
+                    this.redraw()
+                    this.checkWin(introductionInBoard[0], introductionInBoard[1], this.clickedElem)
                 }
             }
             // If the piece of player 1 enters..
             else if(introductionInBoard != []){
-                removePieceFromPlayer(p, indexOfPiece)
-                redraw()
-                checkWin(introductionInBoard[0], introductionInBoard[1], clickedElem)
+                this.removePieceFromPlayer(this.p, indexOfPiece)
+                this.redraw()
+                this.checkWin(introductionInBoard[0], introductionInBoard[1], this.clickedElem)
             }
-            redraw()
+            this.redraw()
         }
-
-        function removePieceFromPlayer(piecesArray, indexOfPiece){
+        
+        // Quita la ficha del jugador para guardarla en el tablero
+       removePieceFromPlayer(piecesArray, indexOfPiece){
             piecesArray.splice(indexOfPiece, 1)
-            if(playerTourn < players.length-1){
-                playerTourn++
+            if(this.playerTourn < this.players.length-1){
+                this.playerTourn++
             }
             else{
-                playerTourn = 0
+                this.playerTourn = 0
             }
         }
 
-        function checkWin(numY, numX, piece){
-            let winnersArray = piece.checkDiagonalTop(numY, numX, b)
-            if (winnersArray == 1){winnersArray = piece.checkHorizontal(numY, numX, b)}
-            if (winnersArray == 1){winnersArray = piece.checkDiagonalBottom(numY, numX, b)}
-            if (winnersArray == 1){winnersArray = piece.checkVertical(numY, numX, b)}
+        // Genera los chequeos recursivos de la ficha
+        // para verificar si fue una jugada ganadora.
+        // En caso de que lo sea, se eliminan las fichas 
+        // restantes y se imprime el mensaje del ganador
+        checkWin(numY, numX, piece){
+            let winnersArray = piece.checkDiagonalTop(numY, numX, this.b)
+            if (winnersArray == 1){winnersArray = piece.checkHorizontal(numY, numX, this.b)}
+            if (winnersArray == 1){winnersArray = piece.checkDiagonalBottom(numY, numX, this.b)}
+            if (winnersArray == 1){winnersArray = piece.checkVertical(numY, numX, this.b)}
             if (winnersArray >= 4){
-                // console.log("Player "+piece.player+" wins!!")
-                // console.log("("+winnersArray+" pieces)")
-                // alert("Player "+piece.player+" wins!!")
-                p = null
-                s = null
+                // for (let i of this.p) {
+                    // let startTime = new Date().getTime()
+                    // let interval = setInterval(function(){
+                    //     let n = new Date().getTime()
+                    //     if(n - startTime > 4000){
+                    //         clearInterval(interval);
+                    //         return;
+                    //     }
+                    //     i.setPos(i.posX, i.posY+5)
+                    // }, 1000)
+                // }
+                this.p = null
+                this.s = null
                 let hiddenMessage = document.querySelector("#winnerMessage")
                 let winner = document.querySelector(".winner")
                 let loser = document.querySelector(".loser")
-                winner.innerHTML = player1Name
-                loser.innerHTML = player2Name
+                winner.innerHTML = this.players[0]
+                loser.innerHTML = this.players[1]
                 hiddenMessage.classList.remove("hidden")
             }
         }
-    }
 
 
 
