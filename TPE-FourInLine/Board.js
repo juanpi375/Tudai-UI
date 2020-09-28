@@ -114,12 +114,11 @@ class Board{
                 // The beggining of the board + (the center of this column - the middle of the piece width) + width of the previous columns
                 clickedElem.posX = this.initialWidth + (PARTWIDTH/2 - clickedElem.size/2) + PARTWIDTH*indexOfColumn
                 this.parts[i][indexOfColumn] = clickedElem
-                // return true
+                
                 return [i, indexOfColumn]
             }
             i++
         }
-        // return false
         return []
     }
 
