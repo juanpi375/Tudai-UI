@@ -221,8 +221,15 @@ class Game{
                 let hiddenMessage = document.querySelector("#winnerMessage")
                 let winner = document.querySelector(".winner")
                 let loser = document.querySelector(".loser")
-                winner.innerHTML = this.players[0]
-                loser.innerHTML = this.players[1]
+                let winnerIndex = 0
+                if(this.playerTourn == 0){
+                    winnerIndex = this.players.length-1
+                }
+                else{
+                    winnerIndex = this.playerTourn-1
+                }
+                winner.innerHTML = this.players[winnerIndex]
+                loser.innerHTML = this.players[this.playerTourn]
                 hiddenMessage.classList.remove("hidden")
             }
         }
