@@ -39,7 +39,10 @@ class Piece{
 
     draw(){
         let my = this
-        this.img.onload = function(){my.redraw()}
+        this.img.onload = function(){
+            // my.img.classList.add("inverted-image")
+            my.redraw()
+        }
 
         // let img = new Image()
         // img.src = "images/piece1.png"

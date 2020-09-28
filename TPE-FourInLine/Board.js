@@ -2,6 +2,7 @@ const PARTWIDTH = 60
 
 class Board{
     constructor(canvas, context, partsW, partsH){
+        console.log("b created")
         this.canvas = canvas
         this.context = context
         // Height
@@ -14,9 +15,10 @@ class Board{
         this.initialWidth = canvas.width/2 - PARTWIDTH*partsW/2
         this.initialHeight = 40
         // this.backgroundColor = "#753"
-        // this.backgroundColor = "#973"
-        this.backgroundColor = "#740"
-        this.clickablePartColor = "#c51"
+        // this.backgroundColor = "#740"
+        this.backgroundColor ="#c51"
+        // #cc5511
+        this.clickablePartColor = "#f51"
 
         // Matrix to control pieces
         this.parts = [this.partsH]
@@ -133,137 +135,6 @@ class Board{
         // return false
         return []
     }
-
-
-    // checkDiagonalTop(numY, numX, player){
-    //     let winnersArray = []
-    //     let startPointX = 0
-    //     let startPointY = 0
-    //     // Starts the closest possible to the top left..
-    //     if(this.partsH-1 - numY < numX){
-    //         startPointX = numX - (this.partsH-1 - numY)
-    //         startPointY = this.partsH-1
-    //     }
-    //     else{
-    //         startPointY = numY + numX
-    //         startPointX = 0
-    //     }
-    //     // ..traverses all the diagonal long
-    //     while(startPointX < this.partsW && startPointY >= 0){
-    //         if(this.parts[startPointX][startPointY] != null
-    //             && player == this.parts[startPointX][startPointY].player){
-    //             winnersArray.push[this.parts[startPointX][startPointY]]
-    //         }
-    //         else if(winnersArray.length > 3){
-    //             return winnersArray
-    //         }
-    //         else{
-    //             winnersArray = []
-    //         }
-    //         startPointX++
-    //         startPointY--
-    //     }
-    //     return winnersArray
-    // }
-
-    // checkDiagonalBottom(numY, numX, player){
-    //     let winnersArray = []
-    //     let startPointX = 0
-    //     let startPointY = 0
-    //     // Starts the closest possible to the top left..
-    //     if(numX > numY){
-    //         startPointX = numX - numY
-    //         startPointY = 0
-    //     }
-    //     else{
-    //         startPointY = numY - numX
-    //         startPointX = 0
-    //     }
-    //     // ..traverses all the diagonal long
-    //     while(startPointX < this.partsW && startPointY < this.partsH){
-    //         if(this.parts[startPointX][startPointY] != null
-    //             && player == this.parts[startPointX][startPointY].player){
-    //             winnersArray.push[this.parts[startPointX][startPointY]]
-    //         }
-    //         else if(winnersArray.length > 3){
-    //             return winnersArray
-    //         }
-    //         else{
-    //             winnersArray = []
-    //         }
-    //         startPointX++
-    //         startPointY++
-    //     }
-    //     return winnersArray
-    // }
-
-    // checkHorizontal(numY, player){
-    //     let winnersArray = []
-    //     let startPointX = 0
-    //     while(startPointX < this.partsW){
-    //         if(this.parts[startPointX][numY] != null
-    //             && player == this.parts[startPointX][numY].player){
-    //             winnersArray.push[this.parts[startPointX][numY]]
-    //         }
-    //         else if(winnersArray.length > 3){
-    //             return winnersArray
-    //         }
-    //         else{
-    //             winnersArray = []
-    //         }
-    //         startPointX++
-    //     }
-    //     return winnersArray
-    // }
-
-    // checkVertical(numX, numY, player){
-    //     let winnersArray = []
-    //     let startPointY = 0
-    //     while(startPointY <= numY){
-    //         if(this.parts[numX][startPointY] != null
-    //             && player == this.parts[numX][startPointY].player){
-    //             winnersArray.push[this.parts[numX][startPointY]]
-    //         }
-    //         else if(winnersArray.length > 3){
-    //             return winnersArray
-    //         }
-    //         else{
-    //             winnersArray = []
-    //         }
-    //         startPointY++
-    //     }
-    //     return winnersArray
-    // }
-
-
-    // NOT HERE?..
-    // checkDiagonalTop(numY, numX, player){
-    //     this.pieces[numY][numX].checkDiagonalTop(numY, numX, player)
-    // }
-
-    // checkDiagonalBottom(numY, numX, player){
-    //     this.pieces[numY][numX].checkDiagonalBottom(numY, numX, player)
-    // }
-
-    // checkHorizontal(numY, numX, player){
-    //     this.pieces[numY][numX].checkHorizontal(numY, numX, player)
-    // }
-
-    // checkVertical(numY, numX, player){
-    //     this.pieces[numY][numX].checkVertical(numY, numX, player)
-    // }
-    // checkDiagonalBottom(){
-
-    // }
-    // checkHorizontal(){
-
-    // }
-    // checkVertical(){
-
-    // }
-
-
-    // X and Y have been being used wrongly!!
 
 }
 

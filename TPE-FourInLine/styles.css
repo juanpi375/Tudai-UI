@@ -1,0 +1,106 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+input[type=text]{
+    color: #555;
+}
+body{
+    background: #bbf;
+    margin: 0;
+}
+button{
+    border: 2px solid #fff;
+    border-radius: 5px;
+    padding: 7px;
+    background: none;
+    font-weight: bold;
+}
+button:active{
+    background: #aac;
+}
+
+
+.container{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 1vw
+}
+.suboptions{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.suboptions h1{
+    /* margin-bottom: 20vw; */
+    color: #445;
+    font-weight: bold;
+}
+.suboptions button{
+    margin-top: 1.5vw;
+    border-color: #334;
+    color: #334;
+}
+#winnerMessage{
+    max-width: 10vw;
+    transition: all .2s;
+}
+#winnerMessage h2, #winnerMessage span{
+    color: #224;
+}
+#mainMenu{
+    position: absolute;
+    top: 50%;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 1vw;
+    transform: translate(-50%, -50%);
+    border-radius: 25px;
+    background: #99b;
+    color: #fff;
+}
+#mainMenu h1{
+    text-align: center;
+}
+#mainMenu form{
+    text-align: center;
+}
+#mainMenu input[type=text]{
+    padding: .5vw;
+    border-radius: 6px;
+    border: none;
+}
+#mainMenu button{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1.5vw;
+    color: #ffe;
+}
+.mainMenuShown{
+    left: 50%;
+    transition: all .8s;
+}
+.mainMenuHidden{
+    left: -50%;
+}
+#backgroundCover{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    padding: 0;
+    background: rgba(0, 0, 0, .6);
+}
+.backgroundCoverShown{
+    opacity: 1;
+    visibility: visible;
+    transition: all .8s;
+}
+
+.hidden{
+    opacity: 0;
+    visibility: hidden;
+}
