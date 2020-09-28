@@ -107,7 +107,7 @@ class Game{
         function piecesFirstDraw(){
             let yIncrement = 50
             let xIncrement = 0
-            for (let i = 0; i < 21; i++) {
+            for (let i = 0; i < partsH*partsW/2; i++) {
                 if (i != 0 && i%7 == 0){
                     yIncrement += 50
                     xIncrement = 0
