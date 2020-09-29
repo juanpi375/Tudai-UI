@@ -16,6 +16,9 @@ button{
     background: none;
     font-weight: bold;
 }
+button:hover{
+    cursor: pointer;
+}
 button:active{
     background: #aac;
 }
@@ -33,9 +36,12 @@ button:active{
     justify-content: space-evenly;
 }
 .suboptions h1{
-    /* margin-bottom: 20vw; */
+    font-size: 2.5em;
     color: #445;
     font-weight: bold;
+}
+.playersNameDisplay h2{
+    margin-right: 70px;
 }
 .suboptions button{
     margin-top: 1.5vw;

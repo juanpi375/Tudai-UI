@@ -185,14 +185,35 @@ class Game{
         }
         
         // Quita la ficha del jugador para guardarla en el tablero
+        // y reestablece los turnos
        removePieceFromPlayer(piecesArray, indexOfPiece){
             piecesArray.splice(indexOfPiece, 1)
+
+            let playersNameSpan = document.querySelectorAll(".playersNameDisplay span")
+
+            // Es turno del segundo jugador
             if(this.playerTourn < this.players.length-1){
                 this.playerTourn++
+
+                this.canvas.style.border = "5px solid #00f"
+                playersNameSpan[0].innerHTML = ""
+                playersNameSpan[1].style = "color: inherit"
+                playersNameSpan[2].innerHTML = "&#9755"
+                playersNameSpan[2].style = "color: #00f"
+                playersNameSpan[3].style = "color: #00f"
             }
+            // Es turno del primer jugador
             else{
                 this.playerTourn = 0
+
+                this.canvas.style.border = "5px solid #f00"
+                playersNameSpan[0].innerHTML = "&#9755"
+                playersNameSpan[0].style = "color: #f00"
+                playersNameSpan[1].style = "color: #f00"
+                playersNameSpan[2].innerHTML = ""
+                playersNameSpan[3].style = "color: inherit"
             }
+
         }
 
         // Genera los chequeos recursivos de la ficha
@@ -228,6 +249,13 @@ class Game{
                 else{
                     winnerIndex = this.playerTourn-1
                 }
+
+                let playersNameSpan = document.querySelectorAll(".playersNameDisplay span")
+                playersNameSpan[0].innerHTML = ""
+                playersNameSpan[1].innerHTML = ""
+                playersNameSpan[2].innerHTML = ""
+                playersNameSpan[3].innerHTML = ""
+
                 winner.innerHTML = this.players[winnerIndex]
                 loser.innerHTML = this.players[this.playerTourn]
                 hiddenMessage.classList.remove("hidden")

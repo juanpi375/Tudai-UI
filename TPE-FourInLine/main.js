@@ -49,8 +49,10 @@ function prepareNewGame(){
 
 function startNewGame(){
     document.querySelector('#names').click()
-    namePlayer1 = document.querySelector("#namePlayer1").value
-    namePlayer2 = document.querySelector("#namePlayer2").value
+    // namePlayer1 = document.querySelector("#namePlayer1").value
+    namePlayer1 = getNamePlayer1()
+    // namePlayer2 = document.querySelector("#namePlayer2").value
+    namePlayer2 = getNamePlayer2()
     if(namePlayer1 != "" && namePlayer2 != ""){
     boardSizeValue = getBoardSize()
     resetGame()
@@ -59,7 +61,20 @@ function startNewGame(){
 
 function resetGame(){
     g = new Game(namePlayer1, namePlayer2, boardSizeValue)
+
     hiddenMessage.classList.add("hidden")
     backgroundCover.classList.add("hidden")
     mainMenu.classList.add("mainMenuHidden")
+
+    let canvas = document.querySelector("#canvas")
+    canvas.style.border = "5px solid #f00"
+
+    let playersNameSpan = document.querySelectorAll(".playersNameDisplay span")
+    playersNameSpan[0].innerHTML = "&#9755"
+    playersNameSpan[0].style = "color: #f00"
+    playersNameSpan[1].innerHTML = getNamePlayer1()
+    playersNameSpan[1].style = "color: #f00"
+    playersNameSpan[2].innerHTML = ""
+    playersNameSpan[3].innerHTML = getNamePlayer2()
+    playersNameSpan[3].style = "color: inherit"
 }

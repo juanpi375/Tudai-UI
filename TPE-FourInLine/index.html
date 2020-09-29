@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <canvas id="canvas" height="650" width="1000" style="border: 2px solid #333;border-radius: 10px;"></canvas>
+        <canvas id="canvas" height="650" width="1000" style="border: 5px solid #f00;border-radius: 10px;"></canvas>
         <div class="suboptions">
             <h1>Conecta 4!</h1>
                 <div id="winnerMessage" class="hidden">
@@ -21,6 +21,16 @@
                     </h2>
                 </div>
             <div>
+                <div class="playersNameDisplay">
+                    <h2>
+                        <span></span>
+                        <span></span>
+                    </h2>
+                    <h2>
+                       <span></span>
+                       <span></span>
+                    </h2>
+                </div>
                 <div>
                     <button id="resetGameBtn">Reinicien el juego</button>
                 </div>
@@ -38,9 +48,9 @@
         <h3>Elijan sus nombres</h3>
         <form id="namesForm">
             <!-- <label for="name1"></label> -->
-            <input type="text" name="nameForm" id="namePlayer1" value="Leonidas" placeholder="Player 1" required>
+            <input type="text" name="nameForm" id="namePlayer1" value="Javi" placeholder="Jugador 1" required>
             <!-- <label for="name2"></label> -->
-            <input type="text" name="nameForm" id="namePlayer2" value="Bronto" placeholder="Player 2" required>
+            <input type="text" name="nameForm" id="namePlayer2" value="Cristian" placeholder="Jugador 2" required>
             <input type="submit" id="names" style="display: none;">
         </form>
         <h3>Elijan un tamaño de tablero</h3>
