@@ -239,9 +239,10 @@ class Game{
                 // }
                 this.p = null
                 this.s = null
-                let hiddenMessage = document.querySelector("#winnerMessage")
+                let winnerMessage = document.querySelector("#winnerMessage")
                 let winner = document.querySelector(".winner")
                 let loser = document.querySelector(".loser")
+                // console.log("ganastee")
                 let winnerIndex = 0
                 if(this.playerTourn == 0){
                     winnerIndex = this.players.length-1
@@ -258,7 +259,13 @@ class Game{
 
                 winner.innerHTML = this.players[winnerIndex]
                 loser.innerHTML = this.players[this.playerTourn]
-                hiddenMessage.classList.remove("hidden")
+                winnerMessage.classList.remove("hidden")
+            }
+            if(this.p != null && this.p.length == 0
+                && this.s != null && this.s.length == 0){
+                    let drawMessage = document.querySelector("#drawMessage")
+                    drawMessage.classList.remove("hidden")
+                    // console.log("buuuuuuuuu")
             }
         }
 

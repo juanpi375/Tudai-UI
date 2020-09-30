@@ -48,14 +48,14 @@ button:active{
     border-color: #334;
     color: #334;
 }
-#winnerMessage{
+#winnerMessage, #drawMessage{
     max-width: 20vw;
     padding: 12px;
     background: #eee;
     border-radius: 10px;
     transition: all .3s;
 }
-#winnerMessage h2, #winnerMessage span{
+#winnerMessage h2, #winnerMessage span, #drawMessage h2{
     color: #224;
 }
 #mainMenu{

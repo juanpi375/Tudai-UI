@@ -8,7 +8,8 @@ let nameForm = document.querySelector("#nameForm")
 let boardSizeForm = document.querySelector("#boardSizeForm")
 let mainMenuButton = document.querySelector("#mainMenuButton")
 let namesForm = document.querySelector("#namesForm")
-let hiddenMessage = document.querySelector("#winnerMessage")
+let winnerMessage = document.querySelector("#winnerMessage")
+let drawMessage = document.querySelector("#drawMessage")
 
 newGameBtn.addEventListener("click", prepareNewGame)
 mainMenuButton.addEventListener("click", startNewGame)
@@ -62,7 +63,9 @@ function startNewGame(){
 function resetGame(){
     g = new Game(namePlayer1, namePlayer2, boardSizeValue)
 
-    hiddenMessage.classList.add("hidden")
+    winnerMessage.classList.add("hidden")
+    drawMessage.classList.add("hidden")
+
     backgroundCover.classList.add("hidden")
     mainMenu.classList.add("mainMenuHidden")
 
