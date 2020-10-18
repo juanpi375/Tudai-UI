@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Star Wars</title>
+</head>
+<body>
+    <div id="hero">
+        <img src="images/logo.png" alt="" id="logo-big">
+        <img src="images/death-star.png" alt="" id="death-star">
+    </div>
+    <main>
+        <div class="loader">
+
+        </div>
+        <header>
+            <nav>
+                <img src="images/logo.png" alt="" id="logo-little" class="home-tag">
+                <ul>
+                    <li>
+                        <h3 class="home-tag">Home</h3>
+                    </li>
+                    <li>
+                        <h3 class="events-tag">Events</h3>
+                    </li>
+                    <li>
+                        <h3 class="comments-tag">Comments</h3>
+                    </li>
+                </ul>
+                <span id="hamburguer">
+
+                </span>
+            </nav>
+        </header>
+        <!-- Acá empieza el home -->
+        <section id="home-page-container" class="">
+            <article>
+                <h1>Star Wars: The Saga</h1>
+                <div>
+                    <p>A lot of info about the new movie is coming</p>
+                </div>
+            </article>
+            <article>
+                <h1>Meet the characters</h1>
+                <div class="characters-container">
+                    <div>
+                        <img src="images/kylo.png" alt="">
+                    </div>
+                    <div>
+                        <img src="images/rey.png" alt="" id="rey-img">
+                    </div>
+                    <div>
+                        <img src="images/finn.png" alt="">
+                    </div>
+                    <div>
+                        <img src="images/poe.png" alt="">
+                    </div>
+                </div>
+            </article>
+            <article>
+                <div id="slider-container">
+                    <div id="slider">
+                        <img src="images/slide1.webp" alt="">
+                        <img src="images/slide2.webp" alt="">
+                        <img src="images/slide3.webp" alt="">
+                        <img src="images/slide4.webp" alt="">
+                        <img src="images/slide5.webp" alt="">
+                    </div>
+                    <div id="slider-button-prev"><</div>
+                    <div id="slider-button-next">></div>
+                </div>
+            </article>
+            <article>
+                <h2>The most expected of the year..</h2>
+                <h1>Next year, May the 4th be with us!</h1>
+                <div class="countdown-container">
+                    <h2 id="countdown"></h2>
+                </div>
+            </article>
+        </section>
+        <!-- Aqui empieza la página de eventos -->
+        <section id="events-page-container" class="hidden">
+            <article>
+                <div class="accordion">
+                    <input type="checkbox" name="accordion" class="accordion-input" id="accordion-item1">
+                    <label for="accordion-item1" class="accordion-title">Event 1</label>
+                    <div class="accordion-content">
+                        <img src="images/presenter1.jpeg" alt="">
+                        <div>
+                            <h4>The vibrant World of Brandon Jackson’s Star Wars Photography</h4>
+                            <p>Event next week: Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores ipsa voluptatum molestias ipsam necessitatibus perferendis laborum aut repellat ad, labore commodi fugit ratione esse suscipit illum odit dolor sed assumenda?</p>
+                        </div>
+                    </div>
+                    <input type="checkbox" name="accordion" class="accordion-input" id="accordion-item2">
+                    <label for="accordion-item2" class="accordion-title">Event 2</label>
+                    <div class="accordion-content">
+                        <img src="images/presenter2.webp" alt="">
+                        <div>
+                            <h4>our Star Wars Stories: Who Was Your First Star Wars Friend?</h4>
+                            <p>Event on December: Rerum architecto beatae ipsa. Aspernatur voluptas delectus nam, non voluptatum pariatur laborum odit perspiciatis tempora. Provident sapiente obcaecati eos culpa ducimus quibusdam illo, minus perferendis blanditiis nisi commodi impedit? Officiis!</p>
+                        </div>
+                    </div>
+                    <input type="checkbox" name="accordion" class="accordion-input" id="accordion-item3">
+                    <label for="accordion-item3" class="accordion-title">Event 3</label>
+                    <div class="accordion-content">
+                        <img src="images/presenter3.webp" alt="">
+                        <div>
+                            <h4>our Star Wars Stories, a New Digital Series, Explores the Fan Side of the Force</h4>
+                            <p>January event: Sunt suscipit alias totam debitis. Magni culpa error accusamus a beatae, ratione corrupti pariatur aut deleniti neque alias maiores fugit ducimus tenetur, repellat veniam illo exercitationem quod expedita ipsa molestiae.</p>
+                        </div>
+                    </div>
+                    <input type="checkbox" name="accordion" class="accordion-input" id="accordion-item4">
+                    <label for="accordion-item4" class="accordion-title">Event 4</label>
+                    <div class="accordion-content">
+                        <img src="images/presenter4.webp" alt="">
+                        <div>
+                            <h4>our Star Wars Stories: What Is Your Most Prized Star Wars Possession?</h4>
+                            <p>Surprise event: Sunt suscipit alias totam debitis. Magni culpa error accusamus a beatae, ratione corrupti pariatur aut deleniti neque alias maiores fugit ducimus tenetur, repellat veniam illo exercitationem quod expedita ipsa molestiae.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+        <!-- Y acá empieza la página de comentarios -->
+        <section id="comments-page-container" class="hidden">
+            <form action="">Aqui hay un form</form>
+        </section>
+    </main>
+    <script src="js.js"></script>
+</body>
+</html>
