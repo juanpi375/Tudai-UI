@@ -12,6 +12,7 @@ let home_tags = document.querySelectorAll(".home-tag")
 let events_tag = document.querySelector(".events-tag")
 let comments_tag = document.querySelector(".comments-tag")
 
+let slider = document.querySelector("#slider")
 let slider_images = document.querySelectorAll("#slider img")
 let prev_arrow = document.querySelector("#slider-button-prev")
 let next_arrow = document.querySelector("#slider-button-next")
@@ -28,8 +29,8 @@ events_tag.addEventListener("click", showEvents)
 comments_tag.addEventListener("click", showComments)
 
 prev_arrow.addEventListener("click", prevPic)
-// next_arrow.addEventListener("click", nextPic)
 next_arrow.addEventListener("click", nextPic)
+slider.addEventListener("animationend", cleanAnimations)
 
 countdown()
 
@@ -59,18 +60,31 @@ function showComments(){
 }
 
 function prevPic(){
-    // Necesito transformar "100%" en 100
-    let slider = document.querySelector("#slider")
-    let aux = slider.style.marginLeft
-    console.log(aux.slice(0,aux.length-1))
-    slider.style.marginLeft = aux.slice(0,aux.length-1) + 100 + "%"
+    let lastNode = slider.removeChild(slider.children[slider.children.length-1])
+    slider.insertBefore(lastNode, slider.children[0])
+    // slider.classList.remove("sliderClickedLeft")
+    slider.classList.add("sliderClickedLeft")
+
+    prev_arrow.removeEventListener("click", prevPic)
+    next_arrow.removeEventListener("click", nextPic)
+    // clean()
 }
 function nextPic(){
-    // Necesito transformar "-100%" en -100
-    let slider = document.querySelector("#slider")
-    let aux = slider.style.marginLeft
-    console.log(aux.slice(0,aux.length-1))
-    slider.style.marginLeft = aux.slice(0,aux.length-1) - 100 + "%"
+    let firstNode = slider.removeChild(slider.children[0])
+    slider.appendChild(firstNode)
+    slider.classList.add("sliderClickedRight")
+
+    prev_arrow.removeEventListener("click", prevPic)
+    next_arrow.removeEventListener("click", nextPic)
+    // slider.style.setProperty("animation", "sliderRight 0.7s linear")
+    // slider.style.animation = "sliderRight 0.7s linear"
+}
+function cleanAnimations(){
+    slider.classList.remove("sliderClickedLeft")
+    slider.classList.remove("sliderClickedRight")
+
+    prev_arrow.addEventListener("click", prevPic)
+    next_arrow.addEventListener("click", nextPic)
 }
 
 function countdown(){

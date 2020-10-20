@@ -29,8 +29,67 @@
                         <h3 class="comments-tag">Comments</h3>
                     </li>
                 </ul>
-                <span id="hamburguer">
-
+                <span class="hamburguer">
+                    <div>
+                        <label for="hamburguer-button" class="hamburguer-title">Trailers</label>
+                        <input type="checkbox" name="" id="hamburguer-button">
+                        <!-- <a href=""></a> -->
+                        <!-- <div class="hamburguer-icon"></div> -->
+                        <ul>
+                            <li>
+                                <a href="https://www.youtube.com/watch_popup?v=n1CUHjrc9Sc" target="_blank">
+                                    <h6>Star Wars i: The Phantom Menace</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/watch_popup?v=DywnxIuPtUs" target="_blank">
+                                    <h6>Star Wars ii: The Clon Wars</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/watch_popup?v=kqkfjBKmWc4" target="_blank">
+                                    <h6>Star Wars iii: The Revenge of the Sith</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/watch_popup?v=beAH5vea99k" target="_blank">
+                                    <h6>Star Wars iv: A New Hope</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/watch_popup?v=xr3hPFJAHO4" target="_blank">
+                                    <h6>Star Wars v: The Empire Strikes Back</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/watch_popup?v=yhuKapE-Bio" target="_blank">    
+                                    <h6>Star Wars vi: The Return of the Jedi</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/watch_popup?v=V8qlIZsutAQ" target="_blank">
+                                    <h6>Star Wars vii: The Force Awakens</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/watch_popup?v=anOJjqQb8x0" target="_blank">
+                                    <h6>Star Wars viii: The Last Jedi</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/watch_popup?v=Izme__ZsURY" target="_blank">
+                                    <h6>Star Wars ix: The Rise of Skywalker</h4>
+                                </a>
+                            </li>
+                            <!-- <li>movie1</li>
+                            <li>movie2</li>
+                            <li>movie3</li>
+                            <li>movie4</li>
+                            <li>movie5</li>
+                            <li>movie6</li>
+                            <li>movie7</li> -->
+                        </ul>
+                    </div>
                 </span>
             </nav>
         </header>
@@ -62,21 +121,23 @@
             <article>
                 <div id="slider-container">
                     <div id="slider">
+                        <img src="images/slide5.webp" alt="">
                         <img src="images/slide1.webp" alt="">
                         <img src="images/slide2.webp" alt="">
                         <img src="images/slide3.webp" alt="">
                         <img src="images/slide4.webp" alt="">
-                        <img src="images/slide5.webp" alt="">
                     </div>
                     <div id="slider-button-prev"><</div>
                     <div id="slider-button-next">></div>
                 </div>
             </article>
             <article>
-                <h2>The most expected of the year..</h2>
-                <h1>Next year, May the 4th be with us!</h1>
-                <div class="countdown-container">
-                    <h2 id="countdown"></h2>
+                <div class="countdown-div">
+                    <h2>The most expected of the year..</h2>
+                    <h1>Next year, May the 4th be with us!</h1>
+                    <div class="countdown-container">
+                        <h2 id="countdown"></h2>
+                    </div>
                 </div>
             </article>
         </section>
@@ -125,7 +186,18 @@
         </section>
         <!-- Y acá empieza la página de comentarios -->
         <section id="comments-page-container" class="hidden">
-            <form action="">Aqui hay un form</form>
+            <article id="comments-form-container">
+                <h1>Leave a message to the actors who made this possible!</h1>
+                <form>
+                    <label for="comments-name">Tell us your name, young padawan..</label>
+                    <input type="text" name="" id="comments-name" placeholder="obi wan kenobi">
+                    <label for="comments-email">Tell us your email..</label>
+                    <input type="email" name="" id="comments-email" placeholder="obiTheWan.starmail.com">
+                    <label for="comments-message">What do you want to tell the actors?</label>
+                    <textarea name="" id="comments-message" cols="30" rows="10" required placeholder="was the millenial falcon trully fast?"></textarea>
+                    <input type="submit" value="Send it!" id="comments-submit">
+                </form>
+            </article>
         </section>
     </main>
     <script src="js.js"></script>
