@@ -157,10 +157,14 @@ nav>ul>li:hover, #logo-little{
 
 /* Home page ------------------------------------ */
 /* Characters cards------------------------------ */
+#characters-article{
+    animation: "appearingFromBottom" 1s ease-in-out;
+}
 .characters-container{
     display: flex;
     justify-content: space-between;
     width: 80vw;
+    /* animation: "appearingFromBottom" 2s linear; */
 }
 .characters-container>div{
     background: #111;
@@ -182,15 +186,21 @@ nav>ul>li:hover, #logo-little{
     transform: scale3d(1.05, 1.05, 1.05);
 }
 /* Slider --------------------------------------- */
+#slider-article{
+    animation: "appearingFromBottom" 1s ease-in-out;
+    padding: 4vh;
+}
 #slider-container{
     position: relative;
     /* top: 10vh; */
     /* bottom: 50vh; */
-    margin: 8vh;
-    width: 80vw;
-    height: 80vh;
+    /* margin: 8vh; */
+    /* top: 10vh; */
+    /* bottom: 90vh; */
+    max-width: 80vw;
+    max-height: 80vh;
     overflow: hidden;
-    border-radius: 4px;
+    border-radius: 5px; 
 }
 #slider{
     width: 500%;
@@ -239,7 +249,6 @@ nav>ul>li:hover, #logo-little{
 }
 /* Countdown------------------------------------ */
 .countdown-div{
-    position: relative;
 }
 
 
@@ -345,7 +354,8 @@ nav>ul>li:hover, #logo-little{
 
 
 
-/* Los Keyframes---------------------------------------------- */
+/* The Keyframes---------------------------------------------- */
+/* Slider cards animations------------------- */
 @keyframes sliderRight{
     0%{margin-left: 0%;}
     100%{margin-left: -100%;}
@@ -353,4 +363,9 @@ nav>ul>li:hover, #logo-little{
 @keyframes sliderLeft{
     0%{margin-left: -200%;}
     100%{margin-left: -100%;}
+}
+
+@keyframes appearingFromBottom{
+    0%{margin-top: 10vh; opacity: 0}
+    100%{margin-top: 0; opacity: 1}
 }
