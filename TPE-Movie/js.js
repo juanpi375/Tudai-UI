@@ -17,6 +17,8 @@ let slider_images = document.querySelectorAll("#slider img")
 let prev_arrow = document.querySelector("#slider-button-prev")
 let next_arrow = document.querySelector("#slider-button-next")
 
+let comments_button = document.querySelector("#comments-submit")
+
 let countdownText = document.querySelector("#countdown")
 
 
@@ -31,6 +33,8 @@ comments_tag.addEventListener("click", showComments)
 prev_arrow.addEventListener("click", prevPic)
 next_arrow.addEventListener("click", nextPic)
 slider.addEventListener("animationend", cleanAnimations)
+
+comments_button.addEventListener("click", formClicked)
 
 countdown()
 showHome()
@@ -134,4 +138,9 @@ function countdown(){
             countdown.innerHTML = "May the 4th be with you.."
         }
     }, 1000)
+}
+
+function formClicked(e){
+    e.preventDefault()
+
 }
