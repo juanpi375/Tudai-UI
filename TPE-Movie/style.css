@@ -69,7 +69,18 @@ section{
     height: 45vh;
     z-index: -1;
 }
-
+/* .scroll-mark{
+    height: 80px;
+    position: absolute;
+    left: 50%;
+    top: 90vh;
+    transform: rotate(180deg);
+    animation: m 0.5s;
+} */
+/* @keyframes m{
+    0%{margin-top:0}
+    100%{margin-top:15px;}
+} */
 
 /* Nav-------------------------------------------- */
 header{
@@ -292,6 +303,9 @@ nav>ul label:hover, #logo-little{
 
 
 /* Events page-------------------------------- */
+.events-introduction{
+    max-width: 80vw;
+}
 .accordion{
     width: 80vw;
 }
@@ -400,7 +414,6 @@ nav>ul label:hover, #logo-little{
     transform: scale3d(1.05, 1.05, 1.05);
     /* transform: scale3d(1.1); */
 }
-
 
 
 

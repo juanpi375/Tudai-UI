@@ -18,6 +18,7 @@ let prev_arrow = document.querySelector("#slider-button-prev")
 let next_arrow = document.querySelector("#slider-button-next")
 
 let comments_button = document.querySelector("#comments-submit")
+// let comments_button_back = document.querySelector("")
 
 let countdownText = document.querySelector("#countdown")
 
@@ -34,7 +35,8 @@ prev_arrow.addEventListener("click", prevPic)
 next_arrow.addEventListener("click", nextPic)
 slider.addEventListener("animationend", cleanAnimations)
 
-comments_button.addEventListener("click", formClicked)
+
+comments_button.addEventListener("click", function(e){formClicked(e, comments_button)})
 
 countdown()
 showHome()
@@ -140,7 +142,12 @@ function countdown(){
     }, 1000)
 }
 
-function formClicked(e){
+function formClicked(e, button){
     e.preventDefault()
-
+    // loaderBack.classList.add("clicked")
+    // loader.removeEventListener("click", click)
+    // setTimeout(function(){
+    //     loaderBack.classList.remove("clicked")
+    //     loader.addEventListener("click", click)
+    // }, 3000)
 }
