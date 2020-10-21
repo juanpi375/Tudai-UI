@@ -335,6 +335,11 @@ nav>ul label:hover, #logo-little{
     margin-right: 3vw;
     object-fit: scale-down;
 }
+.accordion-content>img:hover{
+    /* border-radius: 2%; */
+    transform: scale3d(1.1, 1.1, 1.1);
+    transition: all 0.3s ease-in;
+}
 .accordion-title{
     /* background: orangered; */
     display: block;
