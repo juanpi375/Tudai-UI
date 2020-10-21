@@ -12,21 +12,30 @@
         <img src="images/death-star.png" alt="" id="death-star">
     </div>
     <main>
-        <div class="loader">
-
+        <div id="spinner" hidden>
+            <p>@</p>
         </div>
         <header>
             <nav>
                 <img src="images/logo.png" alt="" id="logo-little" class="home-tag">
                 <ul>
                     <li>
-                        <h3 class="home-tag">Home</h3>
+                        <input type="radio" name="main-menu" id="main-menu-home-tag" checked="true" hidden>
+                        <label for="main-menu-home-tag">
+                            <h3 class="home-tag">Home</h3>
+                        </label>
                     </li>
                     <li>
-                        <h3 class="events-tag">Events</h3>
+                        <input type="radio" name="main-menu" id="main-menu-events-tag" hidden>
+                        <label for="main-menu-events-tag">
+                            <h3 class="events-tag">Events</h3>
+                        </label>
                     </li>
                     <li>
-                        <h3 class="comments-tag">Comments</h3>
+                        <input type="radio" name="main-menu" id="main-menu-comments-tag" hidden>
+                        <label for="main-menu-comments-tag">
+                            <h3 class="comments-tag">Comments</h3>
+                        </label>
                     </li>
                 </ul>
                 <span class="hamburguer">
@@ -81,27 +90,20 @@
                                     <h6>Star Wars ix: The Rise of Skywalker</h4>
                                 </a>
                             </li>
-                            <!-- <li>movie1</li>
-                            <li>movie2</li>
-                            <li>movie3</li>
-                            <li>movie4</li>
-                            <li>movie5</li>
-                            <li>movie6</li>
-                            <li>movie7</li> -->
                         </ul>
                     </div>
                 </span>
             </nav>
         </header>
         <!-- Acá empieza el home -->
-        <section id="home-page-container" class="">
-            <article>
+        <section id="home-page-container">
+            <article class="bottomAnimate opacity-0">
                 <h1>Star Wars: The Saga</h1>
                 <div>
                     <p>A lot of info about the new movie is coming</p>
                 </div>
             </article>
-            <article id="characters-article">
+            <article class="bottomAnimate opacity-0">
                 <h1>Meet the characters</h1>
                 <div class="characters-container">
                     <div>
@@ -118,7 +120,7 @@
                     </div>
                 </div>
             </article>
-            <article id="slider-article">
+            <article class="bottomAnimate opacity-0">
                 <h1>Revive the most memorable of the saga..</h1>
                 <div id="slider-container">
                     <div id="slider">
@@ -132,7 +134,7 @@
                     <div id="slider-button-next">></div>
                 </div>
             </article>
-            <article>
+            <article class="bottomAnimate opacity-0">
                 <div class="countdown-div">
                     <h2>The most expected of the year..</h2>
                     <h1>Next year, May the 4th be with us!</h1>
@@ -144,33 +146,42 @@
         </section>
         <!-- Aqui empieza la página de eventos -->
         <section id="events-page-container" class="hidden">
-            <article>
+            <article class="bottomAnimate opacity-0">
+                <div class="events-introduction">
+                    <h2>watch where the best fans are going to be</h2>
+                    <p>star wars fans organice events all over the country, the next could be in your neighborhood.. what are you expecting to join?</p>
+                </div>
                 <div class="accordion">
                     <input type="checkbox" name="accordion" class="accordion-input" id="accordion-item1">
-                    <label for="accordion-item1" class="accordion-title">Event 1</label>
+                    <label for="accordion-item1" class="accordion-title">
+                        The vibrant World of Brandon Jackson’s Star Wars Photography
+                    </label>
                     <div class="accordion-content">
                         <img src="images/presenter1.jpeg" alt="">
                         <div>
-                            <h4>The vibrant World of Brandon Jackson’s Star Wars Photography</h4>
-                            <p>Event next week: Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores ipsa voluptatum molestias ipsam necessitatibus perferendis laborum aut repellat ad, labore commodi fugit ratione esse suscipit illum odit dolor sed assumenda?</p>
+                            <!-- <h4>The vibrant World of Brandon Jackson’s Star Wars Photography</h4> -->
+                            <p>in the meeting next week: </p>
+                            <p>When the pandemic hit earlier this year and much of the country went into lockdown, Brandon Jackson decided to make the most of the situation. Meaning, of course, he broke out his Star Wars action figures.</p>
                         </div>
                     </div>
                     <input type="checkbox" name="accordion" class="accordion-input" id="accordion-item2">
-                    <label for="accordion-item2" class="accordion-title">Event 2</label>
+                    <label for="accordion-item2" class="accordion-title">our Star Wars Stories: Who Was Your First Star Wars Friend?</label>
                     <div class="accordion-content">
                         <img src="images/presenter2.webp" alt="">
                         <div>
-                            <h4>our Star Wars Stories: Who Was Your First Star Wars Friend?</h4>
-                            <p>Event on December: Rerum architecto beatae ipsa. Aspernatur voluptas delectus nam, non voluptatum pariatur laborum odit perspiciatis tempora. Provident sapiente obcaecati eos culpa ducimus quibusdam illo, minus perferendis blanditiis nisi commodi impedit? Officiis!</p>
+                            <!-- <h4>our Star Wars Stories: who Was Your First Star Wars Friend?</h4> -->
+                            <p>Event on December: in StarWars.com’s new digital series our Star Wars Stories, Jordan Hembrough travels the country talking to fans about the many ways that Star Wars has impacted their lives.</p>
+                            <p>in addition to the series, we’ve asked these fans some essential Star Wars questions. This week, FJ answers a big one: Who was your first Star Wars friend?</p>
                         </div>
                     </div>
                     <input type="checkbox" name="accordion" class="accordion-input" id="accordion-item3">
-                    <label for="accordion-item3" class="accordion-title">Event 3</label>
+                    <label for="accordion-item3" class="accordion-title">a New Digital Series Explores the Fan Side of the Force</label>
                     <div class="accordion-content">
                         <img src="images/presenter3.webp" alt="">
                         <div>
-                            <h4>our Star Wars Stories, a New Digital Series, Explores the Fan Side of the Force</h4>
-                            <p>January event: Sunt suscipit alias totam debitis. Magni culpa error accusamus a beatae, ratione corrupti pariatur aut deleniti neque alias maiores fugit ducimus tenetur, repellat veniam illo exercitationem quod expedita ipsa molestiae.</p>
+                            <!-- <h4>our Star Wars Stories, a New Digital Series, Explores the Fan Side of the Force</h4> -->
+                            <p>January event: it’s not a stretch to say that Star Wars is more than just a movie.</p>
+                            <p>it’s a cultural phenomenon. Parents and children, friends, and even strangers wearing Star Wars T-shirts can share Star Wars’ timeless story of hope together. But for some fans, that message has a lasting impact long after they leave the theater.</p>
                         </div>
                     </div>
                     <input type="checkbox" name="accordion" class="accordion-input" id="accordion-item4">
@@ -187,7 +198,7 @@
         </section>
         <!-- Y acá empieza la página de comentarios -->
         <section id="comments-page-container" class="hidden">
-            <article id="comments-form-container">
+            <article id="comments-form-container" class="bottomAnimate opacity-0">
                 <h1>Leave a message to the actors who made this possible!</h1>
                 <form>
                     <label for="comments-name">Tell us your name, young padawan..</label>

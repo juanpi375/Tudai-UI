@@ -33,12 +33,35 @@ next_arrow.addEventListener("click", nextPic)
 slider.addEventListener("animationend", cleanAnimations)
 
 countdown()
+showHome()
 
 function scroll(){
     logo_big.style.marginBottom = -document.documentElement.scrollTop/3 + "px";
     death_star.style.marginBottom = document.documentElement.scrollTop/3 + "px";
     body.style.backgroundPositionY = document.documentElement.scrollTop/1.5 + "px";
     main.style.backgroundPositionY = document.documentElement.scrollTop/1.5 + "px";
+
+    let articles = document.querySelectorAll(".bottomAnimate")
+    for (let article of articles) {
+        if (window.scrollY > article.offsetTop-550){
+            article.classList.add("appearingFromBottom")
+        }
+        else{
+            article.classList.remove("appearingFromBottom")
+        }
+    }
+}
+
+function loadPage(auxFunction){
+    let loader = document.querySelector("#spinner")
+    let hero = document.querySelector("#hero")
+    hero.hidden = true
+    loader.hidden = false
+    setTimeout(function(){
+        hero.hidden = false
+        loader.hidden = true;
+        auxFunction()
+    }, 100)
 }
 
 function hidePages(){
@@ -46,17 +69,23 @@ function hidePages(){
         section.classList.add("hidden")
     }
 }
+
 function showHome(){
+    document.querySelector("#main-menu-home-tag").checked = true
     hidePages()
-    home_page_container.classList.remove("hidden")
+    let revealPage = function(){home_page_container.classList.remove("hidden")}
+    loadPage(revealPage)
 }
 function showEvents(){
     hidePages()
-    events_page_container.classList.remove("hidden")
+    // events_page_container.classList.remove("hidden")
+    let revealPage = function(){events_page_container.classList.remove("hidden")}
+    loadPage(revealPage)
 }
 function showComments(){
     hidePages()
-    comments_page_container.classList.remove("hidden")
+    let revealPage = function(){comments_page_container.classList.remove("hidden")}
+    loadPage(revealPage)
 }
 
 function prevPic(){
