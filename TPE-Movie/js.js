@@ -67,7 +67,7 @@ function loadPage(auxFunction){
         hero.hidden = false
         loader.hidden = true;
         auxFunction()
-    }, 100)
+    }, 3000)
 }
 
 function hidePages(){
