@@ -2,10 +2,19 @@
 ### Set of user interface practical works. Everything from the use of canvas to the implementation of design principles
 ## Topics learned
 - **[Paint work](https://juanpi375.github.io/Tudai-UI/TPE-PaintApp):** drawing with canvas (use of its tools), applying custom filters to images and downloading them, "undo" functionally.. 
-- **[Four-in-line work](https://juanpi375.github.io/Tudai-UI/TPE-FourInLine):** 
+- **[Four-in-line work](https://juanpi375.github.io/Tudai-UI/TPE-FourInLine):** game dynamics with canvas tools
 - **[Movie work](https://juanpi375.github.io/Tudai-UI/TPE-Movie):** 3D transitions, page loaders, accordion menus..
 - **[Spoiler5 work](https://juanpi375.github.io/Tudai-UI/TPE-Spoiler5-p1):** design principles and heuristics, common interface patterns, Gestalt laws, Figma as ui software..
 ## Practical works
-### **Paint**
-### App demo
-### App code
+### Paint
+- [App demo](https://juanpi375.github.io/Tudai-UI/TPE-PaintApp) 
+- [App code] 
+### Four-in-line
+- [App demo]
+- [App code]
+### Movie
+- [App demo]
+- [App code] 
+### Spoiler5
+- [App demo]
+- [App code] 
