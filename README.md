@@ -7,9 +7,11 @@
 - **[Spoiler5 work](https://juanpi375.github.io/Tudai-UI/TPE-Spoiler5-p1):** design principles and heuristics, common interface patterns, Gestalt laws, Figma as ui software..
 ## Practical works
 ### Paint
+#### A board with brush and eraser. Images can be uploaded, applied filters and downloaded
 - [App demo](https://juanpi375.github.io/Tudai-UI/TPE-PaintApp) 
 - [App code](./TPE-PaintApp)
 ### Four-in-line
+#### A table game that drags and drops pieces, controls victory and lose situations. Also manages turns and different board sizes 
 - [App demo](https://juanpi375.github.io/Tudai-UI/TPE-FourInLine) 
 - [App code](./TPE-FourInLine)
 ### Movie
