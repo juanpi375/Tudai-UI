@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>TPE 2</title>
+</head>
+<body>
+    <div class="container">
+        <canvas id="canvas" height="650" width="1000" style="border: 5px solid #f00;border-radius: 10px;"></canvas>
+        <div class="suboptions">
+            <h1>Conecta 4!</h1>
+                <div id="winnerMessage" class="hidden">
+                    <h2>
+                        Ganaste <span class="winner"></span>! 
+                    </h2>
+                    <h2>
+                        <span class="loser"></span>, lo siento.. 
+                        hoy compras las facturas..
+                    </h2>
+                </div>
+                <div id="drawMessage" class="hidden">
+                    <h2>Es un empate! Sigan practicando..</h2>
+                </div>
+                <div>
+                    <div class="playersNameDisplay">
+                        <h2>
+                            <span></span>
+                            <span></span>
+                        </h2>
+                        <h2>
+                        <span></span>
+                        <span></span>
+                        </h2>
+                    </div>
+                    <div>
+                        <button id="resetGameBtn">Reinicien el juego</button>
+                    </div>
+                    <div>
+                        <button id="newGameBtn">Comiencen un juego nuevo</button>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <div id="backgroundCover" class="backgroundCoverShown"></div>
+
+    <div id="mainMenu" class="mainMenuShown">
+        <h1>Conecta 4!</h1>
+        <h3>Elijan sus nombres</h3>
+        <form id="namesForm">
+            <!-- <label for="name1"></label> -->
+            <input type="text" name="nameForm" id="namePlayer1" value="Javi" placeholder="Jugador 1" required>
+            <!-- <label for="name2"></label> -->
+            <input type="text" name="nameForm" id="namePlayer2" value="Cristian" placeholder="Jugador 2" required>
+            <input type="submit" id="names" style="display: none;">
+        </form>
+        <h3>Elijan un tamaño de tablero</h3>
+        <form id="boardSizeForm">
+            <label for="option1">7 - 6</label>
+            <input type="radio" name="boardSizeForm" id="option1" value="7 - 6" checked>
+            <label for="option2">5 - 4</label>
+            <input type="radio" name="boardSizeForm" id="option2" value="5 - 4">
+            <label for="option3">6 - 5</label>
+            <input type="radio" name="boardSizeForm" id="option3" value="6 - 5">
+        </form>
+        <button id="mainMenuButton">Que empiece el juego!</button>
+    </div>
+    <script src="Board.js"></script>
+    <script src="Piece.js"></script>
+    <script src="Game.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

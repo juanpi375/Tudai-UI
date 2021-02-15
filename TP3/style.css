@@ -1,0 +1,172 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+}
+.hero-section{
+    position: relative;
+    overflow: hidden;
+}
+.background{
+    height: 100vh;
+    width: 120%;
+    margin-left: -20%;
+    object-fit: cover;
+    object-position: 110% 10%;
+}
+.path{
+    position: absolute;
+    /* left: auto; */
+    right: 0;
+    width: 50%;
+    bottom: 0;
+    /* top: 0; */
+}
+
+
+
+
+
+
+
+.structure{
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: red;
+    margin: 40px;
+}
+.watch{
+    position: absolute;
+    /* margin:150px; */
+    top: 150px;
+    left: 150px;
+    border-radius: 5px;
+    transform-origin: 50% 4px;
+    transform: translate(-50%, 5px) rotate(-180deg);
+}
+.hours{
+    height: 90px;
+    width: 8px;
+    background: #333;
+    animation: time 612s linear infinite;
+}
+.minutes{
+    height: 120px;
+    width: 6px;
+    background: #666;
+    animation: time 60s linear infinite;
+}
+.seconds{
+    height: 140px;
+    width: 3px;
+    background: #bbb;
+    animation: time 1s linear infinite;
+}
+
+@keyframes time{
+    0%{transform: translate(-50%, 5px) rotate(-180deg);}
+    50%{transform: translate(-50%, 5px) rotate(0deg);}
+    100%{transform: translate(-50%, 5px) rotate(180deg);}
+}
+
+
+
+
+
+
+li{
+    list-style: none;
+}
+details{
+    font-size: 2em;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background: #48b;
+    color: #fff;
+}
+
+details img{
+    margin: auto;
+    width: 50%;
+    /* height: 1px; */
+    transition: all 1s;
+    object-fit: cover;
+    object-position: 0% 0%;
+    margin-bottom: 500px;
+}
+details[open] img{
+    /* height: 200px; */
+    margin-bottom: 0px;
+    /* transition: all 2s; */
+}
+
+
+
+
+.loader{
+    position: relative;
+    box-sizing: border-box;
+    width: 500px;
+    height: 200px;
+    margin: auto;
+    margin-top: 200px;
+    margin-bottom: 500px;
+    background: #3b2;
+    border-radius: 10px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.loader:hover{
+    cursor: pointer;
+}
+
+.loader h1{
+    position: relative;
+    font-size: 3em;
+    font-family: sans-serif;
+    line-height: 150px;
+    color: #fff;
+    user-select: none;
+}
+
+.clicked{
+    position: absolute;
+    top: 0;
+    left: 0%;
+    right: auto;
+    height: 100%;
+    width: 0%;
+    background: #291;
+    animation: loader 1.5s ease-in-out 2;
+    /* se realiza dos veces */
+}
+
+/* .loader-back{
+} */
+@keyframes loader{
+    0%{
+        width: 0%;
+        left: 0%;
+        right: auto;
+    }
+    50%{
+        width: 100%;
+        left: 0%;
+        right: 0%;
+    }
+    51%{
+        width: 100%;
+        left: auto;
+        right: 0%;
+    }
+    100%{
+        width: 0%;
+        left: auto;
+        right: 0%;
+    }
+}
+
+

@@ -58,12 +58,22 @@ button{
     color: #666;
     font-weight: bold;
 }
+button:hover{
+    background: #eee;
+}
 button:active{
-    color: #222;
+    color: #444;
+    background: #ddd;
 }
 .redLetters{
     color: #c00;
 }
 .redLetters:active{
     color: #f00;
+}
+.blueLetters{
+    color: #009;
+}
+.blueLetters:active{
+    color: #00f;
 }

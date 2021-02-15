@@ -1,0 +1,446 @@
+/* General infoo---------------------------------- */
+@font-face{
+    src: url("fonts/starjedi/Starjedi.ttf");
+    font-family: Starwars;
+    font-display: swap;
+}
+*{
+    box-sizing: border-box;
+    font-family: Starwars, 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    letter-spacing: 4px;
+    color: #fcdf2b;
+}
+h1, h2, h3, h4, p, label{
+    text-shadow: 0 0 0.8em #fcdf2b;
+}
+h6{
+    text-shadow: 0 0 0.8em #fce02bc9;
+}
+body{
+    /* width: 100%; */
+    margin: 0;
+    background-image: url("images/background-stars.jpg");
+}
+.hidden{
+    display: none;
+}
+main{
+    /* background: url("images/background-stars.jpg"); */
+    padding-bottom: 20vh;
+    object-fit: contain;
+}
+section{
+    /* width: 80vw; */
+    min-width: 80vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.bottomAnimate{
+    transition: all 0.4s ease-in-out;
+}
+.opacity-0{
+    opacity: 0;
+    padding-top: 10vh;
+}
+.appearingFromBottom{
+    opacity: 1;
+    padding-top: 0vh;
+    animation: "appearingFromBottom" 1s ease-in-out;
+}
+
+
+/* Heroo ------------------------------- */
+#hero{
+    height: 125vh;
+    animation: "appearingFromBottom" 1s ease-in-out;
+}
+#logo-big{
+    position: absolute;
+    bottom: 12%;
+    left: -5%;
+    height: 60vh;
+    z-index: -1;
+}
+#death-star{
+    position: absolute;
+    bottom: 12%;
+    left: 65%;
+    height: 45vh;
+    z-index: -1;
+}
+/* .scroll-mark{
+    height: 80px;
+    position: absolute;
+    left: 50%;
+    top: 90vh;
+    transform: rotate(180deg);
+    animation: m 0.5s;
+} */
+/* @keyframes m{
+    0%{margin-top:0}
+    100%{margin-top:15px;}
+} */
+
+/* Nav-------------------------------------------- */
+header{
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    background: #151515;
+    box-shadow: 0px -20px 20px #151515;
+    margin-bottom: 1005vh;
+    z-index: 100;
+}
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+nav>ul{
+    width: 50vw;
+    padding-left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+}
+nav>ul>li>label>h3{
+    /* transition: all 1s; */
+}
+nav>ul>li>input:checked + label>h3{
+    border-bottom: 2px solid #fcdf2b;
+}
+nav>ul h3, nav label, #logo-little{
+    user-select: none;
+}
+nav>ul label:hover, #logo-little{
+    cursor: pointer;
+}
+#logo-little{
+    height: 8vh;
+}
+.hamburguer{
+    width: 10vw;
+}
+.hamburguer>div{
+    position: relative;
+}
+.hamburguer a{
+    text-decoration: none;
+}
+.hamburguer input{
+    display: none;
+}
+.hamburguer h6{
+    margin: 2vh;
+}
+.hamburguer ul{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    left: 50%;
+    transform: translate(-50%);
+    /* margin: 0 -2.5%; */
+    /* margin: 0; */
+    padding: 5px 15px;
+    max-height: 0;
+    width: 20vw;
+    list-style: none;
+    /* font-size: 1.2em; */
+    background: #151515;
+    overflow: hidden;
+    transition: all .3s;
+    border: solid 2px transparent;
+    border-radius: 0px 0px 10px 10px;
+}
+/* .hamburguer>img{
+    min-height: 35vh;
+    border-radius: 2px;
+    margin-right: 3vw;
+} */
+/* .accordion-title{
+    display: block;
+    margin: 0;
+    padding-left: 20px;
+    width: 100%;
+    height: 9vh;
+    line-height: 9vh;
+    border: solid 2px #fcdf2b;
+    border-radius: 3px;
+
+    user-select: none;
+} */
+.hamburguer:hover ul{
+/* #hamburguer-button:checked + ul{ */
+    /* visibility: hidden; */
+    /* height: auto; */
+    max-height: 100vh;
+    /* bottom: -100%; */
+    /* margin: 15px -2.5%; */
+    /* margin: 15px 0; */
+    padding: 5px 15px;
+    /* font-size: 100%; */
+    /* margin: 0; */
+    /* transition: all 1s; */
+}
+
+
+/* Loader----------------------------------------- */
+#spinner{
+    /* margin-top: 50px; */
+    /* margin-left:50px; */
+    margin: auto;
+    margin-top: 50vh;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    line-height: 50px;
+    padding-left: 10px;
+    border:10px solid rgb(243, 236, 236);
+    border-top: 10px solid #fcdf2b;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+
+
+/* Home page ------------------------------------ */
+/* Characters cards------------------------------ */
+.characters-container{
+    display: flex;
+    justify-content: space-between;
+    width: 80vw;
+}
+.characters-container>div{
+    background: #111;
+    background-position: 0% 50%;
+    height: 50vh;
+    width: 17vw;
+    overflow: hidden;
+    border-radius: 2px;
+}
+.characters-container>div>img{
+    display: block;
+    height: 130%;
+    padding-top: 30px;
+    margin: auto;
+    transition: all 0.7s;
+}
+.characters-container>div:hover>img{
+    transform-origin: 100% 130%;
+    transform: scale3d(1.05, 1.05, 1.05);
+}
+/* Slider --------------------------------------- */
+#slider-article{
+    animation: "appearingFromBottom" 1s ease-in-out;
+    padding: 4vh;
+}
+#slider-container{
+    position: relative;
+    /* top: 10vh; */
+    /* bottom: 50vh; */
+    /* margin: 8vh; */
+    /* top: 10vh; */
+    /* bottom: 90vh; */
+    max-width: 80vw;
+    max-height: 80vh;
+    overflow: hidden;
+    border-radius: 5px; 
+}
+#slider{
+    width: 500%;
+    display: flex;
+    flex-direction: row;
+    margin-left: -100%;
+    /* transition: all 0.5s; */
+}
+#slider img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+#slider-button-prev, #slider-button-next{
+    position: absolute;
+    top: 0;
+    /* top: 50%; */
+    /* transform: translateY(-50%); */
+    font-family: monospace;
+    font-size: 3em;
+    font-weight: 1000;
+    height: 100%;
+    width: 8vw;
+    padding-top: 36vh;
+    /* min-width: 10vw; */
+    text-align: center;
+    /* color: #ddd; */
+    background: #333;
+    opacity: 0.7;
+    user-select: none;
+    transition: all 0.2s;
+}
+#slider-button-next{
+    right: 0;
+}
+#slider-button-prev:hover, #slider-button-next:hover{
+    opacity: 0.9;
+    width: 9vw;
+    cursor: pointer;
+}
+#slider.sliderClickedLeft{
+    animation: sliderLeft 0.7s ease-out;
+}
+#slider.sliderClickedRight{
+    animation: sliderRight 0.7s ease-out;
+}
+/* Countdown------------------------------------ */
+.countdown-div{
+}
+
+
+
+
+
+
+/* Events page-------------------------------- */
+.events-introduction{
+    max-width: 80vw;
+}
+.accordion{
+    width: 80vw;
+}
+.accordion-input{
+    /* width: 100vw;
+    height: 10vh;
+    background: orangered; */
+    /* visibility: hidden; */
+    display: none;
+}
+.accordion-content{
+    /* height: 0; */
+    /* position: relative; */
+    /* bottom: 0; */
+    display: flex;
+    margin: 0;
+    padding: 0 15px;
+    max-height: 0;
+    overflow: hidden;
+    transition: all .7s;
+    border: solid 2px transparent;
+    /* font-size: 50%; */
+}
+.accordion-content>img{
+    min-height: 35vh;
+    border-radius: 2px;
+    margin-right: 3vw;
+    object-fit: scale-down;
+}
+.accordion-content>img:hover{
+    /* border-radius: 2%; */
+    transform: scale3d(1.1, 1.1, 1.1);
+    transition: all 0.3s ease-in;
+}
+.accordion-title{
+    /* background: orangered; */
+    display: block;
+    margin: 0;
+    padding-left: 20px;
+    width: 100%;
+    height: 9vh;
+    line-height: 9vh;
+    border: solid 2px #fcdf2b;
+    border-radius: 3px;
+    user-select: none;
+}
+.accordion-title:hover{
+    cursor: pointer;
+}
+.accordion-input:checked + .accordion-title + .accordion-content{
+    /* visibility: hidden; */
+    /* height: auto; */
+    max-height: 50vh;
+    /* bottom: -100%; */
+    margin: 15px 0;
+    padding: 0 15px;
+    /* font-size: 100%; */
+    /* margin: 0; */
+    /* transition: all 1s; */
+}
+
+
+
+
+/* Comments page------------------------------------------ */
+#comments-form-container{
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+}
+#comments-form-container>form{
+    max-width: 50vw;
+    /* text-align: center; */
+}
+/* #comments- */
+#comments-form-container>form>*{
+    display: block;
+}
+#comments-form-container>form>label{
+    padding: 10px;
+    padding-top: 15px;
+}
+#comments-name, #comments-email, #comments-message{
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid #fcdf2b;
+}
+#comments-form-container>form>input, #comments-message{
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px 15px;
+}
+#comments-submit{
+    /* eu! cambialo a color de cta!! */
+    background: #151515;
+    background: rgb(255, 94, 0);
+    /* background: rgb(184, 161, 161); */
+    color: #fff;
+    color: #222;
+    color: #fcdf2b;
+    margin-top: 15px;
+    border: none;
+    transition: all 0.1s;
+}
+#comments-submit:hover{
+    background: rgb(250, 109, 28);
+}
+#comments-submit:active{
+    /* background: red; */
+    transform: scale3d(1.05, 1.05, 1.05);
+    /* transform: scale3d(1.1); */
+}
+
+
+
+/* The Keyframes---------------------------------------------- */
+/* Slider cards animations------------------- */
+@keyframes sliderRight{
+    0%{margin-left: 0%;}
+    100%{margin-left: -100%;}
+}
+@keyframes sliderLeft{
+    0%{margin-left: -200%;}
+    100%{margin-left: -100%;}
+}
+
+/* Elements entering in display smoothly------ */
+@keyframes appearingFromBottom{
+    0%{margin-top: 10vh; opacity: 0}
+    100%{margin-top: 0; opacity: 1}
+}
+
+/* Loader animation--------------------------- */
+@keyframes spin{
+    0%{ transform: rotate(0deg);}
+    100%{transform: rotate(360deg);}
+}
