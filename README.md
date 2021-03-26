@@ -8,17 +8,17 @@
 ## Practical works
 ### Paint
 #### A board with brush and eraser. Images can be uploaded, applied filters and downloaded
-- [App demo](https://juanpi375.github.io/Tudai-UI/TPE-PaintApp)
+- [App demo](https://juanpiPereira.github.io/Tudai-UI/TPE-PaintApp)
 - [App code](./TPE-PaintApp)
 ### Four-in-line
 #### A table game that drags and drops pieces, controls victory and lose situations. Also manages turns and different board sizes 
-- [App demo](https://juanpi375.github.io/Tudai-UI/TPE-FourInLine)
+- [App demo](https://juanpiPereira.github.io/Tudai-UI/TPE-FourInLine)
 - [App code](./TPE-FourInLine)
 ### Movie
 #### A movie web page that contains a form contact, a manual carrousel, accordion menus and 3D animations in transitions and mouse events. Also presents a loader that repressents the loading time
-- [App demo](https://juanpi375.github.io/Tudai-UI/TPE-Movie)
+- [App demo](https://juanpiPereira.github.io/Tudai-UI/TPE-Movie)
 - [App code](./TPE-Movie)
 ### Spoiler5
 #### A complete UX design process about a music app. Comprises from paper sketches and low fidelity models to high fidelity models and a final demo
-- [App demo](https://juanpi375.github.io/Tudai-UI/TPE-Spoiler5-p1)
+- [App demo](https://juanpiPereira.github.io/Tudai-UI/TPE-Spoiler5-p1)
 - [App code](./TPE-Spoiler5-p1)
